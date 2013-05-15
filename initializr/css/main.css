@@ -1,22 +1,81 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
+	@import css/bootstrap.min.css;
+	div.question_background
+	{
+	    /*background-color: #A19494;*/
+	    color: white;
+	    background-color: #3198B6;
+	    padding: 0.9em;
+	    -webkit-border-radius: 6px;
+	    -moz-border-radius: 6px;
+	}
+
+	.central
+	{
+	    /*margin-right: auto;
+	    margin-right: auto;*/
+	}
+
+	.nav-list > .bright > a
+	{
+	    color: #ffffff;
+	}
+
+	.percent-spacer { height: 30px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+	.spacer5 { height: 5px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer10 { height: 10px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer15 { height: 15px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer20 { height: 20px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer25 { height: 25px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer30 { height: 30px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer35 { height: 35px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer40 { height: 40px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer45 { height: 45px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+	.spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+	.btn-large {
+
+	    padding: 15px 15px;
+	    font-size: 17px;
+	      -webkit-border-radius: 6px;
+	         -moz-border-radius: 6px;
+	              border-radius: 6px;
+	}
+
+	body 
+	{
+	    padding-top: 60px;
+	    padding-bottom: 40px;
+	    background-image:url('../img/mooning/mooning.png');
+	}
+
+	a.main-size
+	{
+		/*min-height: 5em;*/
+		padding: 2.5em;
+	}
+
+	.white-text > li > a
+	{
+		color:white;	
+	}
+
+	.white-text > li > a:hover
+	{
+		color:#3198B6;	
+	}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+	@media (max-width: 979px) {
+	      body {
+	        padding-top: 0;
+	      }
+	    }
