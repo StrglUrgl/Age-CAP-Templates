@@ -26,21 +26,27 @@
    Navbar Code
    ========================================================================== -->
 
-        <div class="navbar navbar-fixed-top">
+                <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
-            <div class="container">
+
+            <div class="container-fluid" id="header-container">
+            
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="brand" href="#">Age-CAP - Select</a>
+
+              <div id="back-btn"> <button class="btn btn-info" onClick="history.go(-1);return true;">BACK</button> </div>
+              <a id="page-title" class="brand" href="#">Starting Point</a>
+
               <div class="nav-collapse collapse">
                 <ul class="nav">
-                  <li><a href="#">Home <span class="icon-home"></span></a></li>
+                  <li><a href="index.html">Home <span class="icon-home"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
+
             </div>
           </div>
         </div>
@@ -50,7 +56,7 @@
    ========================================================================== -->
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span4 question_background">
+                <div class="span8 offset2 question_background">
                     <h5>
                     Choose a starting point to rate a location!
                     </h5>
@@ -58,10 +64,10 @@
             </div>
             <div class="spacer10"></div>
             <div class="row-fluid">
-                <div class="span4 question_background">
-                    <a href="location_landing.html" class="btn btn-block btn-info main-size"><h4>Rate My Current Location</h4></a>
-                    <a href="#" class="btn btn-block btn-info main-size"><h4>Rate Another Location</h4></a>
-                    <a href="#" class="btn btn-block btn-info main-size"><h4>Choose a location from the map</h4></a>
+                <div class="span8 offset2 question_background">
+                    <a href="location_form.html" class="btn btn-block btn-info main-size"><h4>Rate My Current Location</h4></a>
+                    <a href="location_form.html" class="btn btn-block btn-info main-size"><h4>Rate Another Location</h4></a>
+                    <a href="map_place.html" class="btn btn-block btn-info main-size"><h4>Choose a location from the map</h4></a>
                 </div>
             </div>
         </div>

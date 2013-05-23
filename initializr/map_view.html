@@ -37,7 +37,8 @@
                 <span class="icon-bar"></span>
               </button>
 
-              <a id="page-title" class="brand" href="#">Home</a>
+              <div id="back-btn"> <button class="btn btn-info" onClick="history.go(-1);return true;">BACK</button> </div>
+              <a id="page-title" class="brand">View Results</a>
 
               <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -49,40 +50,61 @@
             </div>
           </div>
         </div>
+
 <!-- ==========================================================================
    End Navbar Code
-
    ========================================================================== -->
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
+                  <h4 style="text-decoration:underline">Viewing Community Centres within 10 km</h4>
                     <h5>
-                    Age-CAP uses your input to build and share knowledge about which locations are friendly to seniors.<hr>
-                    Rate a location or read prior ratings.
+                    View prior ratings below, or go back to adjust your search settings.
                     </h5>
-                </div>
-            </div>
-            <div class="spacer10"></div>
-             <div class="row-fluid">
-                <div class="span8 offset2 question_background">
-                    <a href="location_landing.html" class="btn btn-block btn-info main-size"><h3>RATE</h3></a>
-                    <a href="select_landing_read.html" class="btn btn-block btn-info main-size"><h3>READ</h3></a>  
+                    <button type="submit" class="btn btn-info">Alter Search Settings</button> 
+                    <button type="submit" class="btn btn-info">Choose a New Starting Point</button> 
                 </div>
             </div>
             <div class="spacer10"></div>
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
-                    <label class="checkbox">
-                      <input type="checkbox"><h5>If you wish to provide information and feedback on your experience with Age-CAP, please check this box before choosing to rate or read </h5>
-                    </label>
-
+                <div id="map"></div>  
                 </div>
             </div>
-           
         </div>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script>
+    var mapOptions = {
+    center: new google.maps.LatLng(43.707842,-79.393473),
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    var markerOptions = {
+        position: new google.maps.LatLng(43.707842,-79.393473),
+        map: map
+    };
+    var marker = new google.maps.Marker(markerOptions);
+    marker.setMap(map);
+
+    var infoWindowOptions = {
+        content: '<div id="content"> <h4>Central Eglinton Community Centre</h4> This location has 1 rating(s).<br> Average score is <strong>3.5</strong></div>' +
+        '<div class="spacer10"></div><a href="view_ratings.html" class="btn btn-info">View Ratings</a>'
+    };
+
+    var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+    google.maps.event.addListener(marker,'click',function(e){
+      
+      infoWindow.open(map, marker);
+      
+    });
+    </script>
+
     </body>
 </html>
