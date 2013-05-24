@@ -53,6 +53,7 @@
 <!-- ==========================================================================
    End Navbar Code
    ========================================================================== -->
+   
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
@@ -65,11 +66,33 @@
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
                     <a href="location_landing_read.html" class="btn btn-block btn-info main-size"><h4>Start at My Current Location</h4></a>
-                    <a href="location_landing_read.html" class="btn btn-block btn-info main-size"><h4>Start at Another Location</h4></a>
-                    <a href="location_landing_read.html" class="btn btn-block btn-info main-size"><h4>Choose a location from the map</h4></a>
+                    <a href="location_form_read.html" class="btn btn-block btn-info main-size"><h4>Start at Another Location</h4></a>
+                    <a href="map_place_read.html" class="btn btn-block btn-info main-size"><h4>Choose a location from the map</h4></a>
                 </div>
             </div>
         </div>
+
+<!-- ==========================================================================
+  Modal Code
+   ========================================================================== -->
+
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">About Age-CAP</h3>
+          </div>
+          <div class="modal-body">
+            <p style=\'text-align:justify\'>Age-CAP is a smartphone application which aims to create a crowd-sourced database of age-friendly locations. It consists of survey styled forms which enable users to quickly rate a location. Users are also able to browse this database to assess the age-friendliness of locations in their neighborhood, providing them access to information which was otherwise unavailable. <br><br>Age-CAP was created by a multi-disciplinary team from the Toronto Rehabilitation Institute, University Health Network and University of Toronto.<br><br>Feedback or questions: iatsl@utoronto.ca</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+<!-- ==========================================================================
+   End Modal Code
+   ========================================================================== -->
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script src="js/vendor/bootstrap.min.js"></script>
