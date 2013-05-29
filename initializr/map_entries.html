@@ -109,6 +109,10 @@ var i;
 
 get3detailsRest();
 
+function doAjax5(){
+$.ajax({type:'POST', url:'http://142.150.169.179/readRestUP.php', data:{term: $("#LocName").val(), term2: $("#searchterm").val()} , success:function(data){ $('#7_content').html(data);}, error:function(){$('#7_content').text("Error obtaining  data. Please try again later.");} });
+} 
+
   function get3detailsRest(){
 $.ajax({type:'POST', url:'http://142.150.169.179/mapRest.php', dataType: 'json', data:{term: "Toronto"} , success: function(data){   store(data);    }, error:function(){$('#map_canvas5').html("<br><br><p align=\'center\'>No results found for your search. Try another search term or broaden you search by entering city name. </p>");}});
 
