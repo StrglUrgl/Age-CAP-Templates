@@ -175,7 +175,6 @@ function listenMarker (mark, i)
     {
       
       google.maps.event.addListener(mark, 'click', function(e) {
-        e.preventDefault();
         $("#LocName").val(arrBoss[0][i]);
         doAjax5();
          if (mark.infowindow) {
