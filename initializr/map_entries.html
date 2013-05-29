@@ -176,7 +176,7 @@ function listenMarker (mark, i)
       
       google.maps.event.addListener(mark, 'click', function(e) {
         $("#LocName").val(arrBoss[0][i]);
-        doAjax5();
+        doAjax5(mark);
          if (mark.infowindow) {
          mark.infowindow.close();
         }// This is incase of multiple clicks on the marker, several infowindows are not opened. Not really required, but still.
