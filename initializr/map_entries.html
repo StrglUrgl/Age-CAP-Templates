@@ -125,7 +125,7 @@ var i;
 get3detailsRest();
 
 function doAjax5(mark){
-$.ajax({type:'POST', url:'http://142.150.169.179/readRestUP.php', data:{term: mark.title, term2: "Toronto"} , success:function(data){ $('#7_content').html(data);}, error:function(){$('#7_content').text("Error obtaining  data. Please try again later.");} });
+$.ajax({type:'POST', url:'http://142.150.169.179/readRestUP.php', data:{term: mark.title, term2: "Toronto"} , success:function(data){ $('#view7b').html(data);}, error:function(){$('#view7b').text("Error obtaining  data. Please try again later.");} });
 } 
 
   function get3detailsRest(){
