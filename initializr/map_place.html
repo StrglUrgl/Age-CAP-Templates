@@ -96,11 +96,14 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
     <script>
     
 function initialize() {
+
+  var marker;
+  var resultsArray = {};
+
   var mapOptions = {
     zoom: 12,
     center: new google.maps.LatLng(43.707842,-79.393473),
@@ -117,7 +120,10 @@ function initialize() {
     google.maps.event.addListener(map, 'mousedown', function(e) {
       held_down = true;
       current_position = e.latLng;
-      window.setTimeout(function () {placeMarker(e.latLng, map);}, 2000);
+      resultsArray = [];
+      resultsArray["lat"] = e.latLng.lat();
+      resultsArray["lng"] = e.latLng.lng();
+      window.setTimeout(function () {placeMarker(e.latLng, map);}, 1000);
     });
 
     google.maps.event.addListener(map, 'mouseup', function(e) {
@@ -126,32 +132,93 @@ function initialize() {
 
     function placeMarker(location, map){
         if(held_down && google.maps.geometry.spherical.computeDistanceBetween(current_position, location) < 100 /* if the cursor moves more than 100 metres, don't place the marker*/){
-          var marker = new google.maps.Marker({
+          if (marker)
+          {
+            marker.setMap(null);
+          }
+          marker = new google.maps.Marker({
             position: location,
             map: map});
           codeLatLng(current_position, marker);
         }
-
     };
-
-}
-    function advancePage(){
-          }
 
     function codeLatLng(curr_pos, marker) {
     var geocoder = new google.maps.Geocoder();
     var infowindow = new google.maps.InfoWindow();
     geocoder.geocode({'latLng': curr_pos}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          infowindow.setContent('<div><h5>'+ results[0].formatted_address + '<h5></div><br><a href="rating_form.html" class="btn btn-info">Rate this location!</button>');
+        if (results[0]) {
+
+          resultsToArray(results[0].address_components);
+
+          infowindow.setContent('<div><h5>'+ results[0].formatted_address + 
+           '<h5></div><br>'+
+           "<form>" +
+           "Location Name: <input id='map-form' type='text' />" +
+           "</form>" +
+           '<a id="start-button" class="btn btn-info">Use as starting point!</button>');
+
           infowindow.open(map, marker);
-        }
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);});
+          }
+
+          google.maps.event.addListener(infowindow, 'domready', function() {
+            $("#start-button").click(function() {
+              resultsArray["name"] = $("#map-form").val();
+              localStorage.setItem("ratingLocation", JSON.stringify(resultsArray));
+              window.location.href = 'rating_form.html';
+            });
+          });
+
       } else {
         alert("Geocoder failed due to: " + status);
       }
     });
   }
+
+    function resultsToArray(components){
+      i = 0; street =""; number = ""; intersection = "";
+      for(j=components.length; i<j; i++){
+        type = components[i].types[0];
+        if (type == "country"){
+          resultsArray["country"] = components[i].long_name;
+        } 
+        else if (type == "locality"){
+          resultsArray["city"] = components[i].long_name;
+        }
+        else if (type == "administrative_area_level_1"){
+          resultsArray["state"] = components[i].long_name;
+        }
+        else if (type == "postal_code"){
+          resultsArray["postal_code"] = components[i].long_name;
+        }
+        else if (type == "route"){
+            street = components[i].long_name;
+        }
+        else if (type == "street_number"){
+            number = components[i].long_name;
+        }
+        else if (type == "intersection"){
+            intersection = components[i].long_name;
+        }
+      }
+      if (street && number) {
+        resultsArray["address"] = number + " " + street;
+      }
+      else if (intersection) {
+        resultsArray["address"] = intersection;
+      }
+      else if (street){
+        resultsArray["address"] = street;
+      }
+      console.log(resultsArray);
+      return resultsArray;
+    }
+
+}
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
