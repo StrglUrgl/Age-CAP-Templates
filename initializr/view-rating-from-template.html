@@ -1,0 +1,138 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>Eggly CC</title>
+
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/main.css">
+
+<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
+<script type="text/javascript" src="Handlebars.js"></script>
+<script type="text/javascript" src="templates/templates.js"></script>
+</head>
+
+<body>
+
+<div class="shoesNav container-fluid"></div>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+Handlebars.registerHelper("getNumber", function(context, options) {
+      if (options.data) return options.data["index"] + 1;
+      else return "";
+    });
+
+Handlebars.registerHelper("getText", function(context, questions, options) {
+      return questions[options.data["index"]]; 
+    });
+
+Handlebars.registerHelper("getArrAvg", function(context, options) {
+      sum = 0;
+
+      n = context.length;
+       if (n == 0) 
+      	{return "Error";}
+
+      size = n;
+
+      for (i=0;i<n;i++)
+      	{
+      		score = context[i];
+  			if (typeof(score) == 'number')
+  			{
+  				sum += score;
+  			}
+  			else
+  			{
+  				size -= 1;
+  			}
+      	};
+      return Math.round((sum / size)*10)/10; 
+    });
+
+Handlebars.registerHelper("getLocAvg", function(context, options) {
+
+      sum = 0;
+
+      m = context.ratings.length;
+      if (m == 0) 
+      	{return "Error";}
+
+      n = context.ratings[0].scores.length
+      size = m*n;
+
+      for (i=0;i<m;i++){
+      		for (j=0;j<n;j++){
+
+      			score = context.ratings[i].scores[j];
+
+      			if (typeof(score) == 'number') {
+      				sum += score;
+      			}
+
+      			else {
+      				size -= 1;
+      			}
+      		}
+      	};
+
+      return  Math.round((sum / size)*10)/10; 
+    });
+
+
+Handlebars.partials = Handlebars.templates;
+var compiledTemplate = Handlebars.templates['view-ratings']; 
+
+var title = localStorage.getItem("nameToView");
+var postal_code = localStorage.getItem("postalCodeToView");
+var type = localStorage.getItem("typeToView");
+var typeName = JSON.parse(localStorage.getItem("names"))[type];
+var questions = JSON.parse(localStorage.getItem("questions"))[type];
+
+var ratings; $.post('http://142.150.169.179/view_ratings.php', {name:title, postal_code:postal_code, table:type}, function(data){
+            ratings = JSON.parse(data);
+            compile();
+          });
+
+function compile() {
+  loco_ation =  {title:title, category:typeName, questions:questions, ratings:ratings};
+
+  /*{title:"Eglinton Community Centre", 
+
+  			  category:"Community Centre",
+
+  			  questions:["The building was accessible.",
+  					   "A seniors discount is offered on classes and memberships.", 
+  					   "There was suitable programming available for seniors", 
+  					   "There was visible and legible signage that directed me to the areas I wanted to use.",
+  					   "There is an opportunity for seniors to volunteer.",
+  					   "Employees and volunteers displayed age friendly attitudes.",
+  					   "Washrooms were accessible."],
+
+  			  ratings:[{scores: [1,2,3,4,5,6,7],
+  					  comments:"Ain't that some shit.",
+              date:"2012-06-04"},
+
+  					  {scores: [7,6,5,4,3,2,1],
+  					  comments:"Ain't that some shit.",
+              date:"2012-06-04"},
+
+  					  {scores: [7,7,7,7,7,7,7],
+  					  comments:"Love this Community Centre. A++ would knock over again.",
+              date:"2012-06-04"}
+  			]}*/
+
+  var html = compiledTemplate(loco_ation);
+  $(".shoesNav").append (html);
+}
+</script>
+</body>

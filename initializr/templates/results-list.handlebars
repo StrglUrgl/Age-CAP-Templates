@@ -1,0 +1,68 @@
+{{>header title}}
+
+<div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span8 offset2 question_background">
+                    <h5>
+                    There is a total of {{ categories.[0]/number}} rating(s) within {{radius}} km of the starting point
+                    </h5>
+                </div>
+            </div>
+            
+            <div class="spacer10"></div>
+
+            <div class="row-fluid">
+                <div class="span8 offset2 question_background">
+                    <h5>
+                    Select the type of location to view, or try again with a different search radius
+                    </h5>
+                </div>
+            </div>
+
+            <div class="spacer10"></div>
+
+            <div class="row-fluid">
+              <div class="span8 offset2 question_background">
+              {{#if categories.[0]/number}}
+                <ul class="nav nav-tabs nav-stacked white-text">
+                {{#each categories}}
+                	{{#if number}}
+                	<li><a href="map_entries.html" {{idFromName name}} name="categories_group"><h5>{{name}} ({{number}})</h5></a></li>
+                	{{/if}}
+                  {{/each}}
+                    </ul>
+              {{/if}}
+              {{#else}}
+              	Sorry, no results were found. Try again with a different search radius or location, or share some ratings yourself!
+              {{/else}}
+              </div>
+            </div>
+            <div class="spacer10"></div>
+
+            <div class="row-fluid">
+              <div class="span8 offset2 question_background"> 
+                <form style="margin:0" class="form-search">
+                    <label class="control-label">Find a location within...</label>
+                    <div class="controls">
+                      <label class="radio inline" for="radio1">
+                        <input type="radio" id="radio1" name="radius_group" value="10"> 10 km
+                      </label>
+                      <label class="radio inline" for="radio2">
+                        <input type="radio" id="radio2" name="radius_group" value="20"> 20 km
+                      </label>
+                      <label class="radio inline" for="radio3">
+                        <input type="radio" id="radio3" name="radius_group" value="50"> 50 km
+                      </label><br>
+                      <!--
+                      <label class="radio inline" for="radio4">
+                        <input type="radio" id="radio4" name="radius_group" value="all"> Everywhere
+                      </label><br> -->
+                     <button type="submit" id="apply" class="btn btn-info" >APPLY</button>
+                    </div> 
+                </form>
+                </div>
+            </div>
+
+        </div>
+
+{{>modal}}

@@ -1,0 +1,129 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>Pre-Compiled</title>
+
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/main.css">
+
+<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
+<script type="text/javascript" src="Handlebars.js"></script>
+<script type="text/javascript" src="templates/templates.js"></script>
+</head>
+
+<body> 
+
+<div class="shoesNav container-fluid"></div>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+//This fetches a bit of info about the location that is necessary
+//for the Handlebars context
+var title = localStorage.getItem("nameToRate");
+var postal_code = localStorage.getItem("postalCodeToRate");
+var type = localStorage.getItem("typeToRate");
+
+var typeName = JSON.parse(localStorage.getItem("names"))[type];
+var questions = JSON.parse(localStorage.getItem("questions"))[type];
+
+//Handlebars code handles setting up the page for viewing
+Handlebars.registerHelper("getNumber", function(context, options) {
+      if (options.data) return options.data["index"] + 1;
+      else return "";
+    });
+
+Handlebars.registerHelper("ifisOdd", function(context, options) {
+      if((options.data["index"] + 1 )% 2) {return options.fn(context);} 
+      else if (context.number % 2) {return options.fn(context);}
+      else return "";
+    });
+Handlebars.registerHelper("ifisEven", function(context, options) {
+      if((options.data["index"] + 1 )% 2 == 0) {return options.fn(context);}
+      else if (context.number % 2 == 0) {return options.fn(context);}
+      else return ""; 
+    });
+
+Handlebars.partials = Handlebars.templates;
+var compiledTemplate = Handlebars.templates['rating-form']; 
+var context = {title:'Rate a '+ typeName, allQuestions:questions}
+context["number"] = context.allQuestions.length;
+var html = compiledTemplate(context);
+$(".shoesNav").append (html);
+//End Handlebars code
+
+function getArrAvg(context) {
+      sum = 0;
+      n = context.length;
+       if (n == 0) 
+      	{return "Error";}
+
+      size = n;
+
+      for (i=0;i<n;i++)
+      	{
+      		score = context[i];
+  			if (typeof(score) == 'number')
+  			{
+  				sum += score;
+  			}
+  			else
+  			{
+  				size -= 1;
+  			}
+      	};
+      return sum / size; 
+    }
+
+
+
+//Submission code handles calling the PHP script to 
+//send the rating + location info to the database
+$("#submit").click(function () {
+
+	//This collects all the ratings inputted by the user
+	var ratingsArray = [];
+	i = 1;
+
+	for (var j = context.number; i <= j; i++) {
+		name = "#group" + i + " .active";
+		ratingsArray[i-1] = $.trim($(name).text());
+		if (!isNaN(ratingsArray[i-1]) && ratingsArray[i-1] != "")
+		{
+			ratingsArray[i-1] = Number(ratingsArray[i-1]);
+		}
+	}
+
+	//This bundles all the data into a JSON array so that it can be sent via POST
+	location_details = JSON.parse(localStorage.getItem("ratingLocation"));
+	submission =  { ratings:ratingsArray,
+					comment:$("#comment").val(),
+					name:title,
+					address:location_details["address"],
+					city:location_details["city"],
+					state:location_details["state"],
+					country:location_details["country"],
+					postal:location_details["postal_code"],
+					lat:location_details["lat"],
+					lng:location_details["lng"],
+					avg:getArrAvg(ratingsArray),
+				  };
+
+	//store the submission so we can verify it's all a-okay
+	localStorage.setItem("submission", JSON.stringify(submission));
+
+	//Now POST it off!
+	$.post('http://142.150.169.179/rating_form.php', submission, function(data){
+            alert(data);
+          });
+
+});
+</script>
+</body>

@@ -38,7 +38,7 @@
               </button>
 
               <div id="back-btn"> <button class="btn btn-info" onClick="history.go(-1);return true;">BACK</button> </div>
-              <a id="page-title" class="brand">View Results</a>
+              <a id="page-title" class="brand">Starting Point</a>
 
               <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -165,7 +165,7 @@ function initialize() {
           google.maps.event.addListener ( infowindow, 'domready', function() {
               $("#start-button").click(function() {
                 localStorage.setItem("starting_coords", JSON.stringify(starting_coords));
-                window.location.href = 'location_landing_read.html';
+                window.location.href = 'results-list-from-template.html';
               });
             }); 
 

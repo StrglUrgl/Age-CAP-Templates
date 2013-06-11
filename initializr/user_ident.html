@@ -72,16 +72,16 @@
 <div class="spacer5"></div>
 <div class="btn-toolbar pagination-centered">
 <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-  <button class="btn btn-large btn-info test">A senior</button> 
-  <button class="btn btn-large btn-info test">Providing care to a senior</button>
-  <button class="btn btn-large btn-info test">Working with a senior</button>
-  <button class="btn btn-large btn-info test">Currently with a senior</button>
-  <button class="btn btn-large btn-info test">Prefer not to say</button>
-  <button class="btn btn-large btn-info test">Other</button>
+  <button name="id_btns" id="q1" class="btn btn-large btn-info test">A senior</button> 
+  <button name="id_btns" id="q2" class="btn btn-large btn-info test">Providing care to a senior</button>
+  <button name="id_btns" id="q3" class="btn btn-large btn-info test">Working with a senior</button>
+  <button name="id_btns" id="q4" class="btn btn-large btn-info test">Currently with a senior</button>
+  <button name="id_btns" id="q5" class="btn btn-large btn-info test">Prefer not to say</button>
+  <button name="id_btns" id="q6" class="btn btn-large btn-info test">Other</button>
 </div>
 <div class="spacer5"></div>
 <div class="btn-toolbar pagination-centered">
-  <button class="btn btn-large btn-danger">Submit</button>
+  <button id="submit" class="btn btn-large btn-danger">Submit</button>
 </div>
 </div>
 
@@ -103,7 +103,6 @@
           </div>
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
           </div>
         </div>
 <!-- ==========================================================================
@@ -114,6 +113,32 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+        $("#submit").click(function(){
+
+          if (!localStorage.getItem("userID"))
+          {
+            UUID = function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3).replace(/[018]/g,b)};
+            uuid = UUID();
+            localStorage.setItem("userID", uuid);
+            //console.log(uuid)
+          }
+
+          else
+          {
+            uuid = localStorage.getItem("userID");
+            //console.log(uuid);
+          }
+          checked = $('.active').attr("id");
+          submission = {uuid:uuid, checked:checked};
+          $.post('http://142.150.169.179/user_ident.php', submission, function(data){
+            alert(data);
+          });
+
+          //window.location.href = localStorage.getItem("trailingPage")
+        });
+        </script>
         
     </body>
 </html>

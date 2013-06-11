@@ -57,11 +57,11 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
-                  <h4 style="text-decoration:underline">Viewing Community Centres within 10 km</h4>
+                  <h4 id="headline" style="text-decoration:underline">Viewing Locations</h4>
                     <h5>
                     View prior ratings below, or go back to adjust your search settings.
                     </h5>
-                    <a href="location_landing_read.html"class="btn btn-info">Alter Search Settings</a> 
+                    <a href="results-list-from-html.template"class="btn btn-info">Alter Search Settings</a> 
                     <a href="select_landing_read.html"class="btn btn-info">Choose a New Starting Point</a> 
                 </div>
             </div>
@@ -72,21 +72,6 @@
                 </div>
             </div>
         </div>
-
-        <div id="view7b" class="question_background" style="min-height:100px;"></div>
-
-        <div id="unseen" class="panel">
-<form>
-<input type="text" id="cntrl" class='jq-ui-forms' value="0" placeholder="Popup control variable"><br/>
-<input type="text" id="postal" class='jq-ui-forms' value="0" placeholder="Postal code"><br/>
-<input type="text" id="lat" class='jq-ui-forms' value="0" placeholder="lat"><br/>
-<input type="text" id="lng" class='jq-ui-forms' value="0" placeholder="long"><br/>
-<input type="text" id="LocName" class='jq-ui-forms' value="0" placeholder="Location name for doAjax"><br/>
-<input type="text" id="mapAdd" class='jq-ui-forms' value="0" placeholder="Map Address"><br/>
-<input type="text" id="mapAdd2" class='jq-ui-forms' value="0" placeholder="Map Address 2"><br/>
-<input type="text" id="searchterm" class='jq-ui-forms' value="0" placeholder="Search Term for Read"><br/>
-</form>
-</div>
 
 <!-- ==========================================================================
   Modal Code
@@ -125,14 +110,15 @@ var i;
 
 getEntries(); 
 
-function doAjax5(mark){
-$.ajax({type:'POST', url:'http://142.150.169.179/readRestUP.php', data:{term: mark.title, term2: "Toronto"} , success:function(data){ $('#view7b').html(data);}, error:function(){$('#view7b').text("Error obtaining  data. Please try again later.");} });
-} 
-
   function getEntries(){
     coords = JSON.parse(localStorage.getItem("starting_coords")); 
     radius = Number(localStorage.getItem("radius"));
-    table = localStorage.getItem("tabletoView")
+    table = localStorage.getItem("tableToView");
+    names = JSON.parse(localStorage.getItem("names"));
+    name = names[table]
+
+    $("#headline").html("Viewing "+name+" Locations within "+radius+" kilometers");
+
     if (radius == "all")
     {
       dataArray={table:table, infiniteRadius:1};
@@ -156,22 +142,18 @@ $.ajax({type:'POST',
     //alert("(0,0) " + resultsArray[0][0] + " (1,0) " + resultsArray[1][0] + " (2,0) " + resultsArray[2][0] +" Rows -Boss " + resultsArray.length + " Columns-Boss[0]" + resultsArray[0].length);
     if(resultsArray[0].length== 0){$('#map').html("<br><br><p align=\'center\'>No results found for your search. Try another search term or broaden you search by entering city name. </p>");}
     else{
-    var currentLatitude = resultsArray[1][0];
-    var currentLongitude =resultsArray[2][0];
-    
-    var latlng = new google.maps.LatLng(currentLatitude, currentLongitude);
+    var latlng = new google.maps.LatLng(coords["lat"], coords["lng"]);
     var mapOptions = {
-        zoom: 13,
+        zoom: 11,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControl: true,
         mapTypeControl: false,
         zoomControlOptions: {
-          style: google.maps.ZoomControlStyle.SMALL,
-          position: google.maps.ControlPosition.LEFT_TOP
+          style: google.maps.ZoomControlStyle.SMALL
         } 
     };
-    alert("map!!")
+
     var manasmap = new google.maps.Map(document.getElementById("map"), mapOptions);
   
     for (i=0;i<resultsArray[0].length;i++){
@@ -196,8 +178,6 @@ function listenMarker (mark, i)
       
       google.maps.event.addListener(mark, 'click', function(e) {
         $("#LocName").val(resultsArray[0][i]);
-        doAjax5(mark);
-
         localStorage.setItem("nameToView", resultsArray[0][i]);
         localStorage.setItem("postalCodeToView", resultsArray[4][i]);
         localStorage.setItem("typeToView", resultsArray[5][i]);
@@ -206,7 +186,7 @@ function listenMarker (mark, i)
          mark.infowindow.close();
         }// This is incase of multiple clicks on the marker, several infowindows are not opened. Not really required, but still.
         mark.infowindow = new google.maps.InfoWindow();
-        mark.infowindow.setContent( resultsArray[0][i] + ' <br>Average rating: ' + resultsArray[3][i] +   '<br><a href="#view7b" style="float:right">View rating>></a>'); 
+        mark.infowindow.setContent( resultsArray[0][i] + ' <br>Average rating: ' + resultsArray[3][i] +   '<br><a href="view-rating-from-template.html" style="float:right">View rating>></a>'); 
         mark.infowindow.open(manasmap,mark);
         setTimeout(function () { mark.infowindow.close(); }, 3000); //This was a good idea to substitute instead of the close others when new opens attempt. 
 

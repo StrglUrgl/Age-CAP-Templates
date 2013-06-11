@@ -3,7 +3,8 @@ names = {community:"Community Centre",
 		 libraries:"Library",
 		 public_transit:"Public Transit",
 		 restaurants:"Restaurant",
-		 shopping_malls:"Shopping Mall"
+		 shopping_malls:"Shopping Mall",
+		 all:"All"
 		 };
 
 questions = {community:["The building was accessible",

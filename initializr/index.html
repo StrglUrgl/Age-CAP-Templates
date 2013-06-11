@@ -37,7 +37,7 @@
                 <span class="icon-bar"></span>
               </button>
 
-              <a id="page-title" class="brand" href="#">Home</a>
+              <a id="page-title" class="brand">Home</a>
 
               <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -65,8 +65,8 @@
             <div class="spacer10"></div>
              <div class="row-fluid">
                 <div class="span8 offset2 question_background">
-                    <a href="location_landing.html" class="btn btn-block btn-info main-size"><h3>Rate a Location</h3></a>
-                    <a href="select_landing_read.html" class="btn btn-block btn-info main-size"><h3>View a Location</h3></a>  
+                    <a id="rate" class="btn btn-block btn-info main-size"><h3>Rate a Location</h3></a>
+                    <a id="read" class="btn btn-block btn-info main-size"><h3>View a Location</h3></a>  
                 </div>
             </div>
             <div class="spacer10"></div>
@@ -103,6 +103,30 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
+    <script type="text/javascript">
+
+    $("#rate").click(function (){
+      if ($("input:checked").length == 0){
+        window.location.href = "location_landing.html";
+      }
+      else{
+        localStorage.setItem("trailingPage", "location_landing.html");
+        window.location.href = "user_ident.html";
+     }
+
+    });
+
+     $("#read").click(function (){
+      if ($("input:checked").length == 0){
+        window.location.href = "select_landing_read.html";
+      }
+      else{
+        localStorage.setItem("trailingPage", "location_landing.html");
+        window.location.href = "user_ident.html";
+     }
+    });
+
+    </script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     </body>

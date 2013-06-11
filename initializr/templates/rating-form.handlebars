@@ -1,0 +1,43 @@
+ {{>header title}}
+
+ {{#each allQuestions}}
+	   {{#ifisOdd this}}
+	   	<div class="row-fluid">
+        <div class="span4 offset2">
+        {{>question-unit}}
+        </div>
+	   {{/ifisOdd}}
+
+	   {{#ifisEven this}}
+	   	<div class="span4">
+	   	{{>question-unit}}
+	   	</div></div>
+	   {{/ifisEven}}
+	   {{/each}}
+
+	   {{#ifisOdd this}}
+	   <div class="span4">
+	    {{>comment-unit}}
+	   </div></div>
+
+	   <div class="row-fluid">
+        <div class="span4 offset2">
+        {{>submit-unit}}
+        </div></div>
+	   {{/ifisOdd}}
+
+	   {{#ifisEven this}}
+	   <div class="row-fluid">
+
+	   <div class="span4 offset2">
+	   {{>comment-unit}}
+	   </div>
+
+	   <div class="span4">
+	   {{>submit-unit}}
+	   </div>
+	   
+	   </div>
+	   {{/ifisEven}}
+
+{{>modal}}
