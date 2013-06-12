@@ -61,7 +61,7 @@
                     <h5>
                     View prior ratings below, or go back to adjust your search settings.
                     </h5>
-                    <a href="results-list-from-html.template"class="btn btn-info">Alter Search Settings</a> 
+                    <a href="results-list-from-template.html"class="btn btn-info">Alter Search Settings</a> 
                     <a href="select_landing_read.html"class="btn btn-info">Choose a New Starting Point</a> 
                 </div>
             </div>
@@ -186,7 +186,7 @@ function listenMarker (mark, i)
          mark.infowindow.close();
         }// This is incase of multiple clicks on the marker, several infowindows are not opened. Not really required, but still.
         mark.infowindow = new google.maps.InfoWindow();
-        mark.infowindow.setContent( resultsArray[0][i] + ' <br>Average rating: ' + resultsArray[3][i] +   '<br><a href="view-rating-from-template.html" style="float:right">View rating>></a>'); 
+        mark.infowindow.setContent( resultsArray[0][i] + ' <br>Average rating: ' + resultsArray[3][i] +  '<br><a href="view-rating-from-template.html" style="float:right">View rating>></a>'); 
         mark.infowindow.open(manasmap,mark);
         setTimeout(function () { mark.infowindow.close(); }, 3000); //This was a good idea to substitute instead of the close others when new opens attempt. 
 

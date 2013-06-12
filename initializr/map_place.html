@@ -120,7 +120,6 @@ function initialize() {
     google.maps.event.addListener(map, 'mousedown', function(e) {
       held_down = true;
       current_position = e.latLng;
-      resultsArray = [];
       resultsArray["lat"] = e.latLng.lat();
       resultsArray["lng"] = e.latLng.lng();
       window.setTimeout(function () {placeMarker(e.latLng, map);}, 1000);
@@ -168,6 +167,7 @@ function initialize() {
           google.maps.event.addListener(infowindow, 'domready', function() {
             $("#start-button").click(function() {
               resultsArray["name"] = $("#map-form").val();
+              localStorage.setItem("postalCodeToRate", resultsArray["postal_code"]);
               localStorage.setItem("ratingLocation", JSON.stringify(resultsArray));
               window.location.href = 'rating-form-from-template.html';
             });
@@ -214,6 +214,7 @@ function initialize() {
       else if (street){
         resultsArray["address"] = street;
       }
+
       console.log(resultsArray);
       return resultsArray;
     }

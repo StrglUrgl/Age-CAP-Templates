@@ -39,7 +39,7 @@
               </button>
 
               <div id="back-btn"> <button class="btn btn-info" onClick="history.go(-1);return true;">BACK</button> </div>
-              <a id="page-title" class="brand">Starting Point</a>
+              <a id="page-title" class="brand" href="#">Starting Point</a>
 
               <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -59,7 +59,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span8 offset2 question_background">
-            <h4>Fill in the details of the starting point below</h4>
+            <h4>Fill in the details of the location below</h4>
         </div> 
     </div>
 
@@ -69,43 +69,50 @@
 <div class="span8 offset2 question_background"> 
     <form class="form-horizontal">
        <div class="control-group">
-        <label class="control-label">Name of Location</label>
+        <label class="control-label">Name</label>
         <div class="controls">
-          <input type="text" id="inputEmail" placeholder="Alta Vista Public Library">
+          <input type="text" id="inputName" placeholder="Alice's Restaurant">
         </div>
       </div> 
 
       <div class="control-group">
         <label class="control-label">Street Address</label>
         <div class="controls">
-          <input type="text" id="inputEmail" placeholder="1234 Address Rd.">
+          <input type="text" id="inputAddress" placeholder="1234 Address Rd.">
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label">City</label>
         <div class="controls">
-          <input type="text" id="inputCity" placeholder="Gotham City">
+          <input type="text" id="inputCity" placeholder="Townsville">
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label" for="inputProvince">Province/State</label>
         <div class="controls">
-          <input type="text" id="inputPassword" placeholder="Nova Scotia">
+          <input type="text" id="inputProvince" placeholder="East Virginia">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Postal Code</label>
+        <div class="controls">
+          <input type="text" id="inputPostal" placeholder="A1B 2C3">
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label" for="inputProvince">Country</label>
         <div class="controls">
-          <input type="text" id="inputPassword" placeholder="Cambodia">
+          <input type="text" id="inputCountry" placeholder="Prussia">
         </div>
       </div>
 
       <div class="control-group">
         <div class="controls">
-          <a type="submit" class="btn btn-info" href="location_landing_read.html">CONTINUE</a>
+          <a type="submit" class="btn btn-info" id="submit-button">CONTINUE</a>
         </div>
       </div>
 </form>
@@ -139,11 +146,39 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
-        <!--<script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script>
+        $("#submit-button").click(function() {
+
+        var ratingLocation = {name: $("#inputName").val(), address: $("#inputAddress").val(),
+                            city: $("#inputCity").val(), state: $("#inputProvince").val(), postal_code: $("#inputPostal").val(),
+                            country: $("#inputCountry").val()}
+
+        var submission = "";
+
+        for (var key in ratingLocation) {if (ratingLocation[key]){submission += ratingLocation[key] + " ";}}
+        submission = $.trim(submission);
+
+        console.log(submission);
+
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({"address": submission}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK){
+
+            starting_coords = {};
+            starting_coords["lat"] = results[0].geometry.location.jb
+            starting_coords["lng"] = results[0].geometry.location.kb
+            console.log(starting_coords["lat"], starting_coords["lng"]);
+
+            localStorage.setItem("starting_coords", JSON.stringify(starting_coords));
+            window.location.href = 'results-list-from-template.html';
+          }
+          else {
+            alert("Location not found. Please ensure you have entered the address information correctly.")
+          }
+        });
+
+        });
+        </script> 
     </body>
 </html>

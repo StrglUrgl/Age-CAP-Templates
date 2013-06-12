@@ -73,7 +73,6 @@
         </div>
 
 
-        
 
 <!-- ==========================================================================
   Modal Code
@@ -89,34 +88,60 @@
           </div>
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
           </div>
         </div>
 <!-- ==========================================================================
    End Modal Code
    ========================================================================== -->
 
-   <div id="geoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myGeoLabel" aria-hidden="true">  
+    <div id="geoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myGeoLabel" aria-hidden="true" style="max-height:90%">  
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myGeoLabel">Current Location</h3>
           </div>
-          <div class="modal-body">
-            <h5>Geolocation has detected this as your current location. Is this correct?</h5>
-            <div id="map">
+          <div class="modal-body" style="max-height:50%;">
+            <h5>Age-CAP has detected this as your current location. Is this correct?</h5>
+            <div id="map" style="height:50%;">
           </div>
           <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Accept</button>
+            <button class="btn" id="accept" data-dismiss="modal" aria-hidden="true">Accept</a></button>
             <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Dismiss</button>
           </div>
         </div>
-
   <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
   <script src="phonegap.js"></script>
   <script type="text/javascript">
 
 
-   navigator.geolocation.getCurrentPosition(initialize, onError);
+  navigator.geolocation.getCurrentPosition(initialize, onError);
+
+    var geocoder = new google.maps.Geocoder();
+    var infowindow = new google.maps.InfoWindow();
+    var marker;
+    var map;
+
+  function codeLatLng(curr_pos, marker) {
+    geocoder.geocode({'latLng': curr_pos}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+
+          //resultsToArray(results[0].address_components);
+
+          infowindow.setContent('<div><h5>'+ results[0].formatted_address + 
+           '<h5></div>');
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);}); 
+          }
+
+      } 
+
+      else 
+      {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
   
    function onError (){
 
@@ -128,6 +153,8 @@
 
     lat= position.coords.latitude;
     lng= position.coords.longitude;
+    starting_coords={lat:lat, lng:lng};
+
     geo_location=new google.maps.LatLng(lat, lng);
 
 
@@ -137,19 +164,26 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
       position:geo_location
 
     });
 
     marker.setMap(map);
-
+    codeLatLng(geo_location, map);
     $('#geoModal').on('shown', function () {
-    google.maps.event.trigger(map, "resize");
+      google.maps.event.trigger(map, "resize");
+      map.panTo(geo_location);
+      infowindow.open(map, marker);
 
-});
+      $("#accept").click(function() {
+                localStorage.setItem("starting_coords", JSON.stringify(starting_coords));
+                window.location.href = 'results-list-from-template.html';
+      });
+
+    });
 }
    </script>
 

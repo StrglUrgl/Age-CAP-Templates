@@ -99,7 +99,7 @@
             <h3 id="myGeoLabel">Current Location</h3>
           </div>
           <div class="modal-body" style="max-height:50%;">
-            <h5>Geolocation has detected this as your current location. Is this correct?</h5>
+            <h5>Age-CAP has detected this as your current location. Is this correct?</h5>
             <div id="map" style="height:50%;">
           </div>
           <div class="modal-footer">
@@ -112,16 +112,14 @@
   <script src="phonegap.js"></script>
   <script type="text/javascript">
 
+  //Declaring all these global variables is ugly, but it gets the map to work.
+  var geocoder = new google.maps.Geocoder();
+  var infowindow = new google.maps.InfoWindow();
+  var marker;
+  var map;
+  var resultsArray = {};
 
-   navigator.geolocation.getCurrentPosition(initialize, onError);
-  
-   function onError (){
-
-    $("#modal-body").html("<h5>Sorry, Geolocation has failed for your device.</h5>")
-    
-   }
-
-   function resultsToArray(components){
+  function resultsToArray(components){
       i = 0; street =""; number = ""; intersection = "";
       for(j=components.length; i<j; i++){
         type = components[i].types[0];
@@ -160,10 +158,46 @@
       return resultsArray;
     }
 
-   function initialize(position) {
+  function codeLatLng(curr_pos, marker) {
+    geocoder.geocode({'latLng': curr_pos}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
 
+          resultsToArray(results[0].address_components);
+
+          infowindow.setContent('<div><h5>'+ results[0].formatted_address + 
+           '<h5></div><br>'+
+           "<form>" +
+           "Location Name: <input id='map-form' type='text' />" +
+           "</form>");
+
+          //infowindow.open(map, marker);
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);}); 
+          }
+      } 
+
+      else
+      {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+
+   navigator.geolocation.getCurrentPosition(initialize, onError);
+  
+   function onError (){
+
+    $("#modal-body").html("<h5>Sorry, Geolocation has failed for your device.</h5>")
+    
+   }
+
+   function initialize(position) {
     lat= position.coords.latitude;
     lng= position.coords.longitude;
+    resultsArray["lat"] = lat;
+    resultsArray["lng"] = lng;
     geo_location=new google.maps.LatLng(lat, lng);
 
 
@@ -173,23 +207,25 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
       position:geo_location
 
     });
 
     marker.setMap(map);
-
+    codeLatLng(geo_location, marker);
     $('#geoModal').on('shown', function () {
-    google.maps.event.trigger(map, "resize");
-    map.panTo(geo_location);
-    $("#accept").click(function(){
+      google.maps.event.trigger(map, "resize");
+      map.panTo(geo_location);
+      infowindow.open(map, marker);
 
-
-      window.location.href = "rating-form-from-template.html"
-    });
+      $("#accept").click(function() {
+                resultsArray["name"] = $("#map-form").val();
+                localStorage.setItem("ratingLocation", JSON.stringify(resultsArray));
+              window.location.href = 'rating-form-from-template.html';
+      });
 
 });
 }

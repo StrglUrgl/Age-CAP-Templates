@@ -100,11 +100,14 @@
 <!-- ==========================================================================
    End Modal Code
    ========================================================================== -->
-
+    
+    <script src="js/dictionaries.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script type="text/javascript">
-
+    localStorage.setItem("names", JSON.stringify(names));
+    localStorage.setItem("questions", JSON.stringify(questions));
+    localStorage.setItem("radius", 10);
     $("#rate").click(function (){
       if ($("input:checked").length == 0){
         window.location.href = "location_landing.html";
@@ -121,7 +124,7 @@
         window.location.href = "select_landing_read.html";
       }
       else{
-        localStorage.setItem("trailingPage", "location_landing.html");
+        localStorage.setItem("trailingPage", "select_landing_read.html");
         window.location.href = "user_ident.html";
      }
     });
@@ -131,3 +134,60 @@
     <script src="js/main.js"></script>
     </body>
 </html>
+
+
+<!--
+RatingsNumQuestion: "7"
+length: 20
+nameToRate: "WaterWorld"
+nameToView: "North York library"
+names: (...)
+postalCodeToRate: "M5N 2A9"
+postalCodeToView: "M4S"
+questions: (...)
+radius: "50"
+ratingLocation: "{"lat":43.71945066416126,"lng":-79.42172706127167,"city":"Toronto","state":"Ontario","country":"Canada","postal_code":"M5N 2A9","address":"101-107 Caribou Road","name":"Poppa Smurf's Magic Kitchen"}"
+ratingsNumQuestion: "7"
+starting_coords: "{"lat":43.718954401037124,"lng":-79.4025331735611}"
+submission: "{"ratings":["undefined","undefined","undefined","undefined","undefined","undefined","undefined"],"comment":"ppp","name":"Poppa Smurf's Magic Kitchen","address":"101-107 Caribou Road","city":"Toronto","state":"Ontario","country":"Canada","postal":"M5N 2A9","lat":43.71945066416126,"lng":-79.42172706127167,"avg":null,"table":"public_transit"}"
+tableToRate: "public_transit"
+tableToView: "libraries"
+tabletoView: "restaurants"
+trailingPage: "location_landing.html"
+tyToRate: "public_transit"
+typeToRate: "public_transit"
+typeToView: "libraries"
+userID: "f8cd9ca8-b24a-4b19"
+
+GLOBAL
+
+* names, questions, trailingPage, radius=10 stored on page index.html
+* userID stored on page user_ident.html
+
+RATE
+
+* tableToRate and typeToRate are stored on page location_landing.html (only one of these is neccessary)
+
+  CURRENT LOCATION
+  * ratingLocation is stored on page select_landing.html
+  * submission complete !!
+
+  ANOTHER LOCATION
+  * ratingLocation is stored on page location_form.html
+
+  SELECT FROM MAP
+  * ratingLocation is stored on page map_place.html
+
+  READ
+
+  CURRENT LOCATION
+  * starting_coords are stored on select_landing_read.html
+  * tableToView and typeToView are stored on page results-list-from-template.html (only one of these is neccessary)
+  * nameToView and tableToView are stored on page map_entries.html
+
+  ANOTHER LOCATION
+
+  SELECT FROM MAP
+
+-->
+

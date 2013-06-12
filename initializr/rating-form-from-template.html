@@ -27,8 +27,7 @@
 
 //This fetches a bit of info about the location that is necessary
 //for the Handlebars context
-var title = localStorage.getItem("nameToRate");
-var postal_code = localStorage.getItem("postalCodeToRate");
+
 var type = localStorage.getItem("typeToRate");
 
 var typeName = JSON.parse(localStorage.getItem("names"))[type];
@@ -95,7 +94,11 @@ $("#submit").click(function () {
 	for (var j = context.number; i <= j; i++) {
 		name = "#group" + i + " .active";
 		ratingsArray[i-1] = $.trim($(name).text());
-		if (!isNaN(ratingsArray[i-1]) && ratingsArray[i-1] != "")
+    if (ratingsArray[i-1] == "")
+    {
+      ratingsArray[i-1] = "undefined";
+    }
+		if (!isNaN(ratingsArray[i-1]))
 		{
 			ratingsArray[i-1] = Number(ratingsArray[i-1]);
 		}
@@ -105,7 +108,7 @@ $("#submit").click(function () {
 	location_details = JSON.parse(localStorage.getItem("ratingLocation"));
 	submission =  { ratings:ratingsArray,
 					comment:$("#comment").val(),
-					name:title,
+					name:location_details["name"],
 					address:location_details["address"],
 					city:location_details["city"],
 					state:location_details["state"],
@@ -114,16 +117,20 @@ $("#submit").click(function () {
 					lat:location_details["lat"],
 					lng:location_details["lng"],
 					avg:getArrAvg(ratingsArray),
+          table:type
 				  };
 
-	//store the submission so we can verify it's all a-okay
-	localStorage.setItem("submission", JSON.stringify(submission));
+	//store the submission so we can verify it's all a-okay (testing only)
+	//localStorage.setItem("submission", JSON.stringify(submission));
 
 	//Now POST it off!
 	$.post('http://142.150.169.179/rating_form.php', submission, function(data){
-            alert(data);
+            //alert(data);
+            console.log(data);
+            window.location.href = "rate_again.html";
           });
+
 
 });
 </script>
-</body>
+</body>
