@@ -56,6 +56,7 @@ var context = {title:'Rate a '+ typeName, allQuestions:questions}
 context["number"] = context.allQuestions.length;
 var html = compiledTemplate(context);
 $(".shoesNav").append (html);
+main();
 //End Handlebars code
 
 function getArrAvg(context) {
@@ -133,4 +134,5 @@ $("#submit").click(function () {
 
 });
 </script>
-</body>
+</body>
+

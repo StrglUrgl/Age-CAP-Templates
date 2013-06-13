@@ -23,6 +23,8 @@
 
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/bounding.js"></script>
+
+<script src="js/main.js"></script>
 <script>	
 
 list = {list:["community","crosswalks","libraries","public_transit","restaurants","shopping_malls"]};
@@ -96,6 +98,8 @@ function displayPage(){
 	context["number"] = context.categories.length;				           
 	var html = compiledTemplate(context);
 	$(".shoesNav").append (html);
+
+  main();
 
     $("#apply").click(function(){
         new_radius = $('[name="radius_group"]:checked').attr("value");

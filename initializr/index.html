@@ -39,9 +39,10 @@
 
               <a id="page-title" class="brand">Home</a>
 
-              <div class="nav-collapse collapse">
+              <div id="collapse-div" class="nav-collapse collapse">
                 <ul class="nav">
                   <li><a href="index.html">Home <span class="icon-home"></span></a></li>
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
@@ -93,8 +94,7 @@
             <p style=\'text-align:justify\'>Age-CAP is a smartphone application which aims to create a crowd-sourced database of age-friendly locations. It consists of survey styled forms which enable users to quickly rate a location. Users are also able to browse this database to assess the age-friendliness of locations in their neighborhood, providing them access to information which was otherwise unavailable. <br><br>Age-CAP was created by a multi-disciplinary team from the Toronto Rehabilitation Institute, University Health Network and University of Toronto.<br><br>Feedback or questions: iatsl@utoronto.ca</p>
           </div>
           <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
+            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
           </div>
         </div>
 <!-- ==========================================================================
@@ -108,6 +108,7 @@
     localStorage.setItem("names", JSON.stringify(names));
     localStorage.setItem("questions", JSON.stringify(questions));
     localStorage.setItem("radius", 10);
+
     $("#rate").click(function (){
       if ($("input:checked").length == 0){
         window.location.href = "location_landing.html";
@@ -119,7 +120,7 @@
 
     });
 
-     $("#read").click(function (){
+    $("#read").click(function (){
       if ($("input:checked").length == 0){
         window.location.href = "select_landing_read.html";
       }
@@ -128,7 +129,6 @@
         window.location.href = "user_ident.html";
      }
     });
-
     </script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
@@ -137,27 +137,6 @@
 
 
 <!--
-RatingsNumQuestion: "7"
-length: 20
-nameToRate: "WaterWorld"
-nameToView: "North York library"
-names: (...)
-postalCodeToRate: "M5N 2A9"
-postalCodeToView: "M4S"
-questions: (...)
-radius: "50"
-ratingLocation: "{"lat":43.71945066416126,"lng":-79.42172706127167,"city":"Toronto","state":"Ontario","country":"Canada","postal_code":"M5N 2A9","address":"101-107 Caribou Road","name":"Poppa Smurf's Magic Kitchen"}"
-ratingsNumQuestion: "7"
-starting_coords: "{"lat":43.718954401037124,"lng":-79.4025331735611}"
-submission: "{"ratings":["undefined","undefined","undefined","undefined","undefined","undefined","undefined"],"comment":"ppp","name":"Poppa Smurf's Magic Kitchen","address":"101-107 Caribou Road","city":"Toronto","state":"Ontario","country":"Canada","postal":"M5N 2A9","lat":43.71945066416126,"lng":-79.42172706127167,"avg":null,"table":"public_transit"}"
-tableToRate: "public_transit"
-tableToView: "libraries"
-tabletoView: "restaurants"
-trailingPage: "location_landing.html"
-tyToRate: "public_transit"
-typeToRate: "public_transit"
-typeToView: "libraries"
-userID: "f8cd9ca8-b24a-4b19"
 
 GLOBAL
 

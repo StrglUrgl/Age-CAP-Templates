@@ -23,7 +23,6 @@
 <div class="shoesNav container-fluid"></div>
 
 <script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
 <script>
 
 Handlebars.registerHelper("getNumber", function(context, options) {
@@ -133,6 +132,8 @@ function compile() {
 
   var html = compiledTemplate(loco_ation);
   $(".shoesNav").append (html);
+  main();
 }
 </script>
+<script src="js/main.js"></script>
 </body>
