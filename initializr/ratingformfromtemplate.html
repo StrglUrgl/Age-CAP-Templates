@@ -8,10 +8,10 @@
 <meta name="viewport" content="width=device-width">
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/bootstrapresponsive.min.css">
 <link rel="stylesheet" href="css/main.css">
 
-<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="js/vendor/modernizr262respond110min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
 <script type="text/javascript" src="Handlebars.js"></script>
 <script type="text/javascript" src="templates/templates.js"></script>
@@ -51,7 +51,7 @@ Handlebars.registerHelper("ifisEven", function(context, options) {
     });
 
 Handlebars.partials = Handlebars.templates;
-var compiledTemplate = Handlebars.templates['rating-form']; 
+var compiledTemplate = Handlebars.templates['ratingform']; 
 var context = {title:'Rate a '+ typeName, allQuestions:questions}
 context["number"] = context.allQuestions.length;
 var html = compiledTemplate(context);
@@ -128,7 +128,7 @@ $("#submit").click(function () {
 	$.post('http://142.150.169.179/rating_form.php', submission, function(data){
             //alert(data);
             console.log(data);
-            window.location.href = "rate_again.html";
+            window.location.href = "rateagain.html";
           });
 
 

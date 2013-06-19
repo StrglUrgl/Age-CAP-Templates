@@ -11,9 +11,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/bootstrapresponsive.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <script src="js/vendor/modernizr262respond110min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -41,7 +42,6 @@
 
               <div id="collapse-div" class="nav-collapse collapse">
                 <ul class="nav">
-                  <li><a href="index.html">Home <span class="icon-home"></span></a></li>
                   <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -66,19 +66,20 @@
             <div class="spacer10"></div>
              <div class="row-fluid">
                 <div class="span8 offset2 question_background">
-                    <a id="rate" class="btn btn-block btn-info main-size"><h3>Rate a Location</h3></a>
-                    <a id="read" class="btn btn-block btn-info main-size"><h3>View a Location</h3></a>  
+                    <a id="rate" class="btn btn-block btn-primary main-size"><h3>Rate a Location</h3></a>
+                    <a id="read" class="btn btn-block btn-primary main-size"><h3>View a Location</h3></a>  
                 </div>
             </div>
             <div class="spacer10"></div>
-            <div class="row-fluid">
+            
+        <!-- <div class="row-fluid">
                 <div class="span8 offset2 question_background">
                     <label class="checkbox">
                       <input type="checkbox"><h5>If you wish to provide information and feedback on your experience with Age-CAP, please check this box before choosing to rate or read </h5>
                     </label>
 
                 </div>
-            </div>         
+            </div>   -->      
         </div>
 
 <!-- ==========================================================================
@@ -94,7 +95,7 @@
             <p style=\'text-align:justify\'>Age-CAP is a smartphone application which aims to create a crowd-sourced database of age-friendly locations. It consists of survey styled forms which enable users to quickly rate a location. Users are also able to browse this database to assess the age-friendliness of locations in their neighborhood, providing them access to information which was otherwise unavailable. <br><br>Age-CAP was created by a multi-disciplinary team from the Toronto Rehabilitation Institute, University Health Network and University of Toronto.<br><br>Feedback or questions: iatsl@utoronto.ca</p>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
           </div>
         </div>
 <!-- ==========================================================================
@@ -103,30 +104,31 @@
     
     <script src="js/dictionaries.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script type="text/javascript">
     localStorage.setItem("names", JSON.stringify(names));
     localStorage.setItem("questions", JSON.stringify(questions));
     localStorage.setItem("radius", 10);
+    userID = localStorage.getItem("userID")
 
     $("#rate").click(function (){
-      if ($("input:checked").length == 0){
-        window.location.href = "location_landing.html";
+      if (userID){
+        window.location.href = "locationlanding.html";
       }
       else{
-        localStorage.setItem("trailingPage", "location_landing.html");
-        window.location.href = "user_ident.html";
+        localStorage.setItem("trailingPage", "locationlanding.html");
+        window.location.href = "userident.html";
      }
 
     });
 
     $("#read").click(function (){
-      if ($("input:checked").length == 0){
-        window.location.href = "select_landing_read.html";
+      if (userID){
+        window.location.href = "selectlandingread.html";
       }
       else{
-        localStorage.setItem("trailingPage", "select_landing_read.html");
-        window.location.href = "user_ident.html";
+        localStorage.setItem("trailingPage", "selectlandingread.html");
+        window.location.href = "userident.html";
      }
     });
     </script>
@@ -141,28 +143,28 @@
 GLOBAL
 
 * names, questions, trailingPage, radius=10 stored on page index.html
-* userID stored on page user_ident.html
+* userID stored on page userident.html
 
 RATE
 
-* tableToRate and typeToRate are stored on page location_landing.html (only one of these is neccessary)
+* tableToRate and typeToRate are stored on page locationlanding.html (only one of these is neccessary)
 
   CURRENT LOCATION
-  * ratingLocation is stored on page select_landing.html
+  * ratingLocation is stored on page selectlanding.html
   * submission complete !!
 
   ANOTHER LOCATION
-  * ratingLocation is stored on page location_form.html
+  * ratingLocation is stored on page locationform.html
 
   SELECT FROM MAP
-  * ratingLocation is stored on page map_place.html
+  * ratingLocation is stored on page mapplace.html
 
   READ
 
   CURRENT LOCATION
-  * starting_coords are stored on select_landing_read.html
-  * tableToView and typeToView are stored on page results-list-from-template.html (only one of these is neccessary)
-  * nameToView and tableToView are stored on page map_entries.html
+  * starting_coords are stored on selectlandingread.html
+  * tableToView and typeToView are stored on page resultslistfromtemplate.html (only one of these is neccessary)
+  * nameToView and tableToView are stored on page mapentries.html
 
   ANOTHER LOCATION
 

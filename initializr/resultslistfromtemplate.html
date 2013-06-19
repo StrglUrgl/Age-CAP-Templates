@@ -8,10 +8,10 @@
 <meta name="viewport" content="width=device-width">
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/bootstrapresponsive.min.css">
 <link rel="stylesheet" href="css/main.css">
 
-<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="js/vendor/modernizr262respond110min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
 <script type="text/javascript" src="Handlebars.js"></script>
 <script type="text/javascript" src="templates/templates.js"></script>
@@ -82,7 +82,7 @@ $.post('http://142.150.169.179/results_list.php', dataArray, function(data){
 
 function displayPage(){
 	Handlebars.partials = Handlebars.templates;
-	var compiledTemplate = Handlebars.templates['results-list']; 
+	var compiledTemplate = Handlebars.templates['resultslist']; 
 
 	/*context = {number:0, title:'Results', radius:10, categories:[{name:"All", number:1},
 	                                                                {name:"Community Centre", number:1},

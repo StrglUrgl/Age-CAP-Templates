@@ -1,6 +1,6 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['comment-unit'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['commentunit'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; data = data || {};
   
@@ -14,7 +14,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "     <div class=\"navbar navbar-fixed-top\">\r\n          <div class=\"navbar-inner\">\r\n\r\n            <div class=\"container-fluid\" id=\"header-container\">\r\n            \r\n              <button type=\"button\" class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n              </button>\r\n\r\n              <div id=\"back-btn\"> <button class=\"btn btn-info\" onClick=\"history.go(-1);return true;\">BACK</button> </div>\r\n              <a id=\"page-title\" class=\"brand\" href=\"#\">"
+  buffer += "     <div class=\"navbar navbar-fixed-top\">\r\n          <div class=\"navbar-inner\">\r\n\r\n            <div class=\"container-fluid\" id=\"header-container\">\r\n            \r\n              <button type=\"button\" class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n              </button>\r\n\r\n              <div id=\"back-btn\"> <button class=\"btn btn-primary\" onClick=\"history.go(-1);return true;\">BACK</button> </div>\r\n              <a id=\"page-title\" class=\"brand\" href=\"#\">"
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
     + "</a>\r\n\r\n              <div class=\"nav-collapse collapse\">\r\n                <ul class=\"nav\">\r\n                  <li><a href=\"index.html\">Home   <span class=\"icon-home\"></span></a></li>\r\n                  <li> <a id=\"font-button\">Change Font Size  <span class=\"icon-font\"></span></a></li>\r\n                  <li> <a href=\"#myModal\" data-toggle=\"modal\">About Age-CAP</a></li>\r\n                </ul>\r\n              </div><!--/.nav-collapse -->\r\n\r\n            </div>\r\n          </div>\r\n        </div>";
   return buffer;
@@ -48,7 +48,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
   return "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">  \r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\r\n            <h3 id=\"myModalLabel\">About Age-CAP</h3>\r\n          </div>\r\n          <div id=\"ModalText\" class=\"modal-body\">\r\n            <p style=\\'text-align:justify\\'>Age-CAP is a smartphone application which aims to create a crowd-sourced database of age-friendly locations. It consists of survey styled forms which enable users to quickly rate a location. Users are also able to browse this database to assess the age-friendliness of locations in their neighborhood, providing them access to information which was otherwise unavailable. <br><br>Age-CAP was created by a multi-disciplinary team from the Toronto Rehabilitation Institute, University Health Network and University of Toronto.<br><br>Feedback or questions: iatsl@utoronto.ca</p>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\r\n          </div>\r\n        </div>";
   });
-templates['question-unit'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['questionunit'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
@@ -59,10 +59,10 @@ helpers = helpers || Handlebars.helpers; data = data || {};
     + "</h4>\r\n	                        <div class=\"spacer5\"></div>\r\n	                </div>\r\n\r\n	                <div class=\"row-fluid\">\r\n	                    <div class=\"btn-group btn-group-vertical\" data-toggle=\"buttons-radio\" id=\"group";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.getNumber),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "getNumber", depth0, options)))
-    + "\">\r\n	                        <div class=\"btn-group\">\r\n	                            <button class=\"btn btn-large btn-info\"> 1 </button>                         \r\n	                            <button class=\"btn btn-large btn-info\"> 2 </button>                         \r\n	                            <button class=\"btn btn-large btn-info\"> 3 </button>                         \r\n	                            <button class=\"btn btn-large btn-info\"> 4 </button>                         \r\n	                            <button class=\"btn btn-large btn-info\"> 5 </button>\r\n	                        </div>\r\n	                        <!--<div class=\"percent-spacer\"></div>-->\r\n	                        <button class=\"btn btn-large btn-info\"> Not Applicable </button>\r\n	                    </div>\r\n	                </div>\r\n	 \r\n	            </div>\r\n	            <div class=\"percent-spacer\"></div>";
+    + "\">\r\n	                        <div class=\"btn-group\">\r\n	                            <button class=\"btn btn-large btn-primary\"> 1 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 2 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 3 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 4 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 5 </button>\r\n	                        </div>\r\n	                        <!--<div class=\"percent-spacer\"></div>-->\r\n	                        <button class=\"btn btn-large btn-primary\"> Not Applicable </button>\r\n	                    </div>\r\n	                </div>\r\n	 \r\n	            </div>\r\n	            <div class=\"percent-spacer\"></div>";
   return buffer;
   });
-templates['rating-form'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['ratingform'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
   var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing;
@@ -85,7 +85,7 @@ function program2(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n	   	<div class=\"row-fluid\">\r\n        <div class=\"span4 offset2\">\r\n        ";
-  stack1 = self.invokePartial(partials['question-unit'], 'question-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.questionunit, 'questionunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n        </div>\r\n	   ";
   return buffer;
@@ -95,7 +95,7 @@ function program4(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n	   	<div class=\"span4\">\r\n	   	";
-  stack1 = self.invokePartial(partials['question-unit'], 'question-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.questionunit, 'questionunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	   	</div></div>\r\n	   ";
   return buffer;
@@ -105,10 +105,10 @@ function program6(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n	   <div class=\"span4\">\r\n	    ";
-  stack1 = self.invokePartial(partials['comment-unit'], 'comment-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.commentunit, 'commentunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	   </div></div>\r\n\r\n	   <div class=\"row-fluid\">\r\n        <div class=\"span4 offset2\">\r\n        ";
-  stack1 = self.invokePartial(partials['submit-unit'], 'submit-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.submitunit, 'submitunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n        </div></div>\r\n	   ";
   return buffer;
@@ -118,10 +118,10 @@ function program8(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n	   <div class=\"row-fluid\">\r\n\r\n	   <div class=\"span4 offset2\">\r\n	   ";
-  stack1 = self.invokePartial(partials['comment-unit'], 'comment-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.commentunit, 'commentunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	   </div>\r\n\r\n	   <div class=\"span4\">\r\n	   ";
-  stack1 = self.invokePartial(partials['submit-unit'], 'submit-unit', depth0, helpers, partials, data);
+  stack1 = self.invokePartial(partials.submitunit, 'submitunit', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	   </div>\r\n	   \r\n	   </div>\r\n	   ";
   return buffer;
@@ -146,7 +146,7 @@ function program8(depth0,data) {
   if(stack2 || stack2 === 0) { buffer += stack2; }
   return buffer;
   });
-templates['results-list'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['resultslist'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
   var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this, blockHelperMissing=helpers.blockHelperMissing;
@@ -172,7 +172,7 @@ function program2(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\r\n                	<li><a href=\"map_entries.html\" ";
+  buffer += "\r\n                	<li><a href=\"mapentries.html\" ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.idFromName),stack1 ? stack1.call(depth0, depth0.name, options) : helperMissing.call(depth0, "idFromName", depth0.name, options)))
     + " name=\"categories_group\"><h5>";
@@ -210,12 +210,12 @@ function program5(depth0,data) {
   else { stack2 = depth0['else']; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   if (!helpers['else']) { stack2 = blockHelperMissing.call(depth0, stack2, options); }
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\r\n              </div>\r\n            </div>\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\"> \r\n                <form style=\"margin:0\" class=\"form-search\">\r\n                    <label class=\"control-label\"><h4>Find a location within...</h4></label>\r\n                    <div class=\"controls\">\r\n                      <label class=\"radio inline\" for=\"radio1\">\r\n                        <input type=\"radio\" id=\"radio1\" name=\"radius_group\" value=\"10\"> 10 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio2\">\r\n                        <input type=\"radio\" id=\"radio2\" name=\"radius_group\" value=\"20\"> 20 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio3\">\r\n                        <input type=\"radio\" id=\"radio3\" name=\"radius_group\" value=\"50\"> 50 km\r\n                      </label><br><br>\r\n                      <!--\r\n                      <label class=\"radio inline\" for=\"radio4\">\r\n                        <input type=\"radio\" id=\"radio4\" name=\"radius_group\" value=\"all\"> Everywhere\r\n                      </label><br> -->\r\n                     <button type=\"submit\" id=\"apply\" class=\"btn btn-info\" >APPLY</button>\r\n                    </div> \r\n                </form>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n";
+  buffer += "\r\n              </div>\r\n            </div>\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\"> \r\n                <form style=\"margin:0\" class=\"form-search\">\r\n                    <label class=\"control-label\"><h4>Find a location within...</h4></label>\r\n                    <div class=\"controls\">\r\n                      <label class=\"radio inline\" for=\"radio1\">\r\n                        <input type=\"radio\" id=\"radio1\" name=\"radius_group\" value=\"10\"> 10 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio2\">\r\n                        <input type=\"radio\" id=\"radio2\" name=\"radius_group\" value=\"20\"> 20 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio3\">\r\n                        <input type=\"radio\" id=\"radio3\" name=\"radius_group\" value=\"50\"> 50 km\r\n                      </label><br><br>\r\n                      <!--\r\n                      <label class=\"radio inline\" for=\"radio4\">\r\n                        <input type=\"radio\" id=\"radio4\" name=\"radius_group\" value=\"all\"> Everywhere\r\n                      </label><br> -->\r\n                     <button type=\"submit\" id=\"apply\" class=\"btn btn-primary\" >APPLY</button>\r\n                    </div> \r\n                </form>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n";
   stack2 = self.invokePartial(partials.modal, 'modal', depth0, helpers, partials, data);
   if(stack2 || stack2 === 0) { buffer += stack2; }
   return buffer;
   });
-templates['submit-unit'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['submitunit'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; data = data || {};
   
@@ -223,7 +223,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
   return " <div class=\"question_background\">\r\n <h4 style=\"color:white\">When you're ready, click this button to submit:</h4> \r\n <a class=\"btn btn-large btn-danger\" id=\"submit\">SUBMIT</a>\r\n</div>";
   });
-templates['view-ratings'] = template(function (Handlebars,depth0,helpers,partials,data) {
+templates['viewratings'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
   var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this;

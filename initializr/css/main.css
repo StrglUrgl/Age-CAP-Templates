@@ -7,7 +7,8 @@
 	{
 	    /*background-color: #A19494;*/
 	    color: white;
-	    background-color: #3198B6;
+	    /*background-color: #3198B6; */
+        background-color: rgb(0, 125, 204);
 	    padding: 0.9em;
 	    -webkit-border-radius: 6px;
 	    -moz-border-radius: 6px;
@@ -163,4 +164,13 @@ label {
   #content .modal.fade.in {
     top: 5%;
   }
+}
+
+.getIt {
+font-size: 18px;
+background-color:rgb(238, 238, 238);
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px; 
+padding:20px;
 }

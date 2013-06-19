@@ -1,7 +1,7 @@
 names = {community:"Community Centre",
 		 crosswalks:"Crosswalk",
 		 libraries:"Library",
-		 public_transit:"Public Transit",
+		 public_transit:"Public Transit Route",
 		 restaurants:"Restaurant",
 		 shopping_malls:"Shopping Mall",
 		 all:"All"
