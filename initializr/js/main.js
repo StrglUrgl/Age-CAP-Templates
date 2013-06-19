@@ -32,7 +32,8 @@ function main(){
       makeBig();
     }
 
-    $("#font-button").click(function (){
+    $("#font-button").click(function ()
+    {
       if(toggle) {
         makeBig();
       	toggle=0;
@@ -45,7 +46,7 @@ function main(){
         localStorage.setItem("toggle", 1);
        }
 
-      });
+    });
 }
 
 main();

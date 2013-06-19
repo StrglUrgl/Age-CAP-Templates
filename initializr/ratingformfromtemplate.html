@@ -133,6 +133,15 @@ $("#submit").click(function () {
 
 
 });
+
+$("#comment").on("focus", function () {
+    $(window).on("scroll", function(){
+      console.log("bump");
+      $("#comment").blur();
+      $(window).off("scroll");
+    });
+});
+
 </script>
 </body>
 

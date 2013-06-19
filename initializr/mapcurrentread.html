@@ -109,9 +109,9 @@
 
           infowindow.setContent('<div><h5>'+ results[0].formatted_address + 
            '<h5></div><br>'+
-           "<div class='btn-group'>"+ 
-          "<button class='btn btn-success' id='accept' data-dismiss='modal' aria-hidden='true'>Accept</a></button>"+
-          "<a class='btn btn-danger' href='selectlandingread.html' aria-hidden='true'>Dismiss</a>" +"/div");
+          "<div class='btn-group'>"+ 
+          "<button class='btn btn-primary' id='accept' data-dismiss='modal' aria-hidden='true'>Accept</a></button>"+
+          "<a class='btn btn-inverse' href='selectlandingread.html' aria-hidden='true'>Dismiss</a>" +"</div>");
 
           infowindow.open(map, marker);
           google.maps.event.addListener(marker, 'click', function() {
