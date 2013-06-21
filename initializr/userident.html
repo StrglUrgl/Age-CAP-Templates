@@ -131,13 +131,19 @@
             uuid = localStorage.getItem("userID");
             //console.log(uuid);
           }
+
           checked = $('.active').attr("id");
+          if (!checked)
+          {
+            checked = "unset";
+          }
           submission = {uuid:uuid, checked:checked};
           $.post('http://142.150.169.179/user_ident.php', submission, function(data){
-            //alert(data);
+            alert(data); 
+            window.location.href = localStorage.getItem("trailingPage")
           });
 
-          window.location.href = localStorage.getItem("trailingPage")
+         
         });
         </script>
         

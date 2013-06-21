@@ -107,6 +107,7 @@ $("#submit").click(function () {
 
 	//This bundles all the data into a JSON array so that it can be sent via POST
 	location_details = JSON.parse(localStorage.getItem("ratingLocation"));
+  userID = localStorage.getItem("userID");
 	submission =  { ratings:ratingsArray,
 					comment:$("#comment").val(),
 					name:location_details["name"],
@@ -118,8 +119,10 @@ $("#submit").click(function () {
 					lat:location_details["lat"],
 					lng:location_details["lng"],
 					avg:getArrAvg(ratingsArray),
-          table:type
+          table:type,
+          userID:userID
 				  };
+
 
 	//store the submission so we can verify it's all a-okay (testing only)
 	//localStorage.setItem("submission", JSON.stringify(submission));
@@ -127,7 +130,7 @@ $("#submit").click(function () {
 	//Now POST it off!
 	$.post('http://142.150.169.179/rating_form.php', submission, function(data){
             //alert(data);
-            console.log(data);
+            //console.log(data);
             window.location.href = "rateagain.html";
           });
 

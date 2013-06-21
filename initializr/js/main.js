@@ -1,4 +1,11 @@
-  
+function connectPrompt()
+{
+  $.post('http://142.150.169.179/rating_form.php', "", function(data){}).fail(function () {
+                                                                                            alert("A connection error prevents you from accesssing Age-CAP. Please connect to the Internet.");
+                                                                                            connectPrompt();
+                                                                                          });
+}
+
 function makeBig()
 {
         $("h5").css({"font-size":"18px"}); 
@@ -14,6 +21,8 @@ function makeSmall()
 }
 
 function main(){
+
+    connectPrompt();
 
     $('.nav-collapse').on('show', function () { 
       $(document.body).css({"padding-top":"190px"});});

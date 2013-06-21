@@ -39,7 +39,7 @@
               </button>
 
               <div id="back-btn"> <button class="btn btn-primary" onClick="history.go(-1);return true;">BACK</button> </div>
-              <a id="page-title" class="brand">View Results</a>
+              <a id="page-title" class="brand">Choose a Location</a>
 
               <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -59,8 +59,8 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
-                  <h4 style="text-decoration:underline">Place a Starting Point</h4>
-                    <h5>Find a location on the map below, then press and hold to place a starting point or return and use another entry method. 
+                  <h4 style="text-decoration:underline">Choose a Location</h4>
+                    <h5>Press and hold to choose a location. 
                     </h5>
                     <a class="btn btn-primary" href="selectlanding.html">Other Entry Methods</a> 
                 </div>
@@ -157,7 +157,7 @@ function initialize() {
            "<form>" +
            "Location Name: <input id='map-form' type='text' />" +
            "</form>" +
-           '<a id="start-button" class="btn btn-primary">Use as starting point!</button>');
+           '<a id="start-button" class="btn btn-primary">Use this location!</button>');
 
           infowindow.open(map, marker);
 
