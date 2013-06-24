@@ -184,7 +184,7 @@
   }
 
 
-   navigator.geolocation.getCurrentPosition(initialize, onError);
+   navigator.geolocation.getCurrentPosition(initialize, onError, {enableHighAccuracy: true});
   
    function onError (){
 
