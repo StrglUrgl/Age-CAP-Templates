@@ -6,10 +6,10 @@
         id        = "AgeCAP"
         version   = "1.0.0">
 
-    <name>Age-CAP Mockup </name>
+    <name>AgeCAP</name>
 
     <description>
-        This is a mock-up of the new version of Age-CAP - an assistive app for seniors
+        This is the new version of Age-CAP - an assistive app for seniors
     </description>
 
     <author href="http://iatsl.org" email="jacob.ritchie@mail.utoronto.ca">
@@ -31,7 +31,7 @@
     <preference name="permissions"                value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-    <preference name="phonegap-version"           value="2.5.0" />          <!-- all: current version of PhoneGap -->
+    <preference name="phonegap-version"           value="2.7.0" />          <!-- all: current version of PhoneGap -->
     <preference name="orientation"                value="default" />        <!-- all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
@@ -98,7 +98,7 @@
     <gap:splash src="img/splash/winphone/splash.jpg" gap:platform="winphone" /> <!-- Windows Phone 7 480x800 -->
         
     <gap:splash src="img/splash/webos/splash.png" gap:platform="webos" /> <!-- WebOS 64x64 -->
-    
+
     <!--
         Define access to external domains.
 
