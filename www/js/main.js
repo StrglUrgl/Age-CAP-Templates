@@ -24,6 +24,10 @@ function main(){
 
     connectPrompt();
 
+    $(function() {
+    FastClick.attach(document.body);
+    });
+
     $('.nav-collapse').on('show', function () { 
       $(document.body).css({"padding-top":"190px"});});
 
