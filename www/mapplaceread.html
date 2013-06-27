@@ -7,7 +7,7 @@
  <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Age-CAP</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -44,7 +44,10 @@
               <div class="nav-collapse collapse">
                 <ul class="nav">
                   <li><a href="index.html">Home <span class="icon-home"></span></a></li>
-                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  
+
+<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
               </div><!--/.nav-collapse -->
@@ -61,7 +64,7 @@
             <div class="row-fluid">
                 <div class="span8 offset2 question_background">
                   <h4 style="text-decoration:underline">Place a Starting Point</h4>
-                    <h5> Press and hold to place a starting point or return and use another entry method. 
+                    <h5> Press and hold to place a starting point.
                     </h5>
                     <a class="btn btn-primary" href="selectlandingread.html">Other Entry Methods</a> 
                 </div>
@@ -108,6 +111,17 @@
     
 function initialize() {
 
+  pinColor = "50C264";
+  var pinImageGreen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0,0),
+      new google.maps.Point(10, 34));
+
+  var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+      new google.maps.Size(40, 37),
+      new google.maps.Point(0, 0),
+    new google.maps.Point(12, 35));
+
   var marker;
   var starting_coords = {};
   var mapOptions = {
@@ -128,7 +142,7 @@ function initialize() {
       current_position = e.latLng;
       starting_coords["lat"] = e.latLng.lat();
       starting_coords["lng"] = e.latLng.lng();
-      window.setTimeout(function () {placeMarker(e.latLng, map);}, 1000);
+      window.setTimeout(function () {placeMarker(e.latLng, map);}, 1500);
     });
 
     google.maps.event.addListener(map, 'mouseup', function(e) {
@@ -143,7 +157,10 @@ function initialize() {
           }
           marker = new google.maps.Marker({
             position: location,
-            map: map});
+            map: map,
+            icon: pinImageGreen,
+            shadow: pinShadow
+          });
           codeLatLng(current_position, marker);
         }
     };
