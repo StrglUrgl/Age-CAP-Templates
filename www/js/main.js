@@ -9,7 +9,7 @@ function connectPrompt()
 function addPadding()
 {
     $('.nav-collapse').on('show', function () { 
-      $(document.body).css({"padding-top":"190px"});});
+      $(document.body).css({"padding-top":"230px"});});
 
     $('.nav-collapse').on('hide', function () {
       $(document.body).css({"padding-top":"60px"});});
