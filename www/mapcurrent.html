@@ -187,9 +187,11 @@
   }
 
 
-   navigator.geolocation.getCurrentPosition(initialize, onError, {enableHighAccuracy: true});
+   navigator.geolocation.getCurrentPosition(initialize, onError, {enableHighAccuracy:true, timeout: 5000, maximumAge: Infinity});
   
-   function onError (){
+   function onError (positionError){
+
+    alert(positionError);
 
     $("#mapcontainer").html("<h5>Sorry, Geolocation is not enabled for your device.</h5>"+
                             "<h5>Please enable it and reload the page, or use an alternate entry method.</h5>"+"<div class='btn-group'>"+
