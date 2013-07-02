@@ -73,9 +73,9 @@ function main(){
 
     connectPrompt();
 
-    $(function() {
+    /*$(function() {
     FastClick.attach(document.body);
-    });
+    }); */
 
     addPadding();
 
