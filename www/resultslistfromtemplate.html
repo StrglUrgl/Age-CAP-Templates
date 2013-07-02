@@ -25,13 +25,16 @@
 <script src="js/bounding.js"></script>
 
 
-Age-CAP
-</script><script src="js/main.js"></script>
+<script src="js/main.js"></script>
 <script>	
 
 list = {list:["community","crosswalks","libraries","public_transit","restaurants","shopping_malls"]};
 coords = JSON.parse(localStorage.getItem("starting_coords")); 
-radius = Number(localStorage.getItem("radius"));
+ radius = localStorage.getItem("radius");
+  if (radius != "all")
+  {
+    radius = Number(radius);
+  }
 
 Handlebars.registerHelper("idFromName", function(name, options) {
 
@@ -96,8 +99,15 @@ function displayPage(){
 
 
 
-	context = {number:0, title:'Results', radius:radius, categories:categories};
-	context["number"] = context.categories.length;				           
+	context = {number: categories.length, 
+             title:'Results', 
+             radius:radius,
+             infiniteRadius: (radius == "all"),
+             categories:categories, 
+             singular:(categories.length == 1), 
+             default: Number(localStorage.getItem("default"))
+           };
+			           
 	var html = compiledTemplate(context);
 	$(".shoesNav").append (html);
 

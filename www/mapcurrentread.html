@@ -125,6 +125,7 @@
           google.maps.event.addDomListener(infowindow, 'domready', function () {
             $("#accept").click(function() {
                 localStorage.setItem("starting_coords", JSON.stringify(starting_coords));
+                localStorage.setItem("default", "0");
                 window.location.href = 'resultslistfromtemplate.html';
             });
           });
@@ -195,7 +196,6 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script src="js/vendor/bootstrap.min.js"></script>
     
-Age-CAP
-</script><script src="js/main.js"></script>
+<script src="js/main.js"></script>
     </body>
 </html>

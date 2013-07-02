@@ -99,8 +99,7 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
     <script src="js/vendor/bootstrap.min.js"></script>
     
-Age-CAP
-</script><script src="js/main.js"></script>
+<script src="js/main.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="js/bounding.js"></script>
 
@@ -130,12 +129,24 @@ var i;
 
 function getEntries(){
   coords = JSON.parse(localStorage.getItem("starting_coords")); 
-  radius = Number(localStorage.getItem("radius"));
+  radius = localStorage.getItem("radius");
+  if (radius != "all")
+  {
+    radius = Number(radius);
+  }
   table = localStorage.getItem("tableToView");
   names = JSON.parse(localStorage.getItem("names"));
   name = names[table]
 
-  $("#headline").html("Viewing "+name+" Locations within "+radius+" kilometers");
+  if(radius != "all"){
+    message = "Viewing "+name+" Locations within "+radius+" kilometers"; 
+  }
+  else{
+    message = "Viewing "+name+" Locations Worldwide";
+  }
+
+
+  $("#headline").html(message);
 
   if (radius == "all")
   {
@@ -169,6 +180,7 @@ function getEntries(){
 
       var latlng = new google.maps.LatLng(coords["lat"], coords["lng"]);
 
+
       var mapOptions = {
           zoom: 11,
           center: latlng,
@@ -179,6 +191,12 @@ function getEntries(){
             style: google.maps.ZoomControlStyle.SMALL
           } 
       };
+
+      if (radius=="all")
+      {
+        mapOptions["zoom"] = 2;
+        mapOptions["center"] = new google.maps.LatLng(20,-85);
+      }
 
       var manasmap = new google.maps.Map(document.getElementById("map"), mapOptions);
     

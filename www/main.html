@@ -111,7 +111,14 @@
     <script type="text/javascript">
     localStorage.setItem("names", JSON.stringify(names));
     localStorage.setItem("questions", JSON.stringify(questions));
-    localStorage.setItem("radius", 10);
+
+    if(!localStorage.getItem("starting_coords"))
+    {
+      localStorage.setItem("radius", "all");
+      localStorage.setItem("starting_coords", JSON.stringify({lat:43.707842,lng:-79.393473}));
+      localStorage.setItem("default","1")
+    }
+
     userID = localStorage.getItem("userID")
 
     $("#rate").click(function (){
@@ -127,18 +134,17 @@
 
     $("#read").click(function (){
       if (userID){
-        window.location.href = "selectlandingread.html";
+        window.location.href = "localworldwideread.html";
       }
       else{
-        localStorage.setItem("trailingPage", "selectlandingread.html");
+        localStorage.setItem("trailingPage", "localworldwideread.html");
         window.location.href = "userident.html";
      }
     });
     </script>
     <script src="js/vendor/bootstrap.min.js"></script>
     
-Age-CAP
-</script><script src="js/main.js"></script>
+<script src="js/main.js"></script>
     </body>
 </html>
 

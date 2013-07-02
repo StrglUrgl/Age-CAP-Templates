@@ -62,6 +62,23 @@ helpers = helpers || Handlebars.helpers; data = data || {};
     + "\">\r\n	                        <div class=\"btn-group\">\r\n	                            <button class=\"btn btn-large btn-primary\"> 1 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 2 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 3 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 4 </button>                         \r\n	                            <button class=\"btn btn-large btn-primary\"> 5 </button>\r\n	                        </div>\r\n	                        <!--<div class=\"percent-spacer\"></div>-->\r\n	                        <button class=\"btn btn-large btn-primary\"> Not Applicable </button>\r\n	                    </div>\r\n	                </div>\r\n	 \r\n	            </div>\r\n	            <div class=\"percent-spacer\"></div>";
   return buffer;
   });
+templates['radiusform'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "\r\n                      <br><br>\r\n                      <label class=\"radio inline\" for=\"radio4\">\r\n                        <input type=\"radio\" id=\"radio4\" name=\"radius_group\" value=\"all\"> Worldwide\r\n                      </label>\r\n                      ";
+  }
+
+  buffer += "<form style=\"margin:0\" class=\"form-search\">\r\n                    <label class=\"control-label\"><h4>Find a location within...</h4></label>\r\n                    <div class=\"controls\">\r\n                      <label class=\"radio inline\" for=\"radio1\">\r\n                        <input type=\"radio\" id=\"radio1\" name=\"radius_group\" value=\"10\"> 10 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio2\">\r\n                        <input type=\"radio\" id=\"radio2\" name=\"radius_group\" value=\"20\"> 20 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio3\">\r\n                        <input type=\"radio\" id=\"radio3\" name=\"radius_group\" value=\"50\"> 50 km\r\n                        </label>\r\n\r\n                      ";
+  stack1 = helpers.unless.call(depth0, depth0.infiniteRadius, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n\r\n                      <br><br>\r\n                     <button type=\"submit\" id=\"apply\" class=\"btn btn-primary\" >Apply</button>\r\n                    </div> \r\n</form>\r\n";
+  return buffer;
+  });
 templates['ratingform'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
@@ -149,27 +166,84 @@ function program8(depth0,data) {
 templates['resultslist'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
-  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this, blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = "", stack1, stack2, options, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, blockHelperMissing=helpers.blockHelperMissing;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "\r\n                <ul class=\"nav nav-tabs nav-stacked white-text\">\r\n                ";
-  stack1 = helpers.each.call(depth0, depth0.categories, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  var buffer = "", stack1, stack2;
+  buffer += "\r\n                    <h5>\r\n                    There ";
+  stack1 = helpers['if'].call(depth0, depth0.singular, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n                    </ul>\r\n              ";
+  buffer += " "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " rating";
+  stack2 = helpers.unless.call(depth0, depth0.singular, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += " within ";
+  if (stack2 = helpers.radius) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.radius; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " km of the starting point\r\n                    </h5>\r\n                ";
   return buffer;
   }
 function program2(depth0,data) {
   
+  
+  return "is ";
+  }
+
+function program4(depth0,data) {
+  
+  
+  return "are";
+  }
+
+function program6(depth0,data) {
+  
+  
+  return "s";
+  }
+
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n                <h5>\r\n                    There are "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " ratings worldwide\r\n                </h5>\r\n                ";
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  
+  return ", or try again with a different search radius</h5>";
+  }
+
+function program12(depth0,data) {
+  
+  
+  return " or choose a starting point to view local ratings</h5>\r\n                  <a href=\"selectlandingread.html\" class=\"btn btn-primary\">Starting Point</a>";
+  }
+
+function program14(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n                <ul class=\"nav nav-tabs nav-stacked white-text\">\r\n                ";
+  stack1 = helpers.each.call(depth0, depth0.categories, {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                    </ul>\r\n              ";
+  return buffer;
+  }
+function program15(depth0,data) {
+  
   var buffer = "", stack1;
   buffer += "\r\n                	";
-  stack1 = helpers['if'].call(depth0, depth0.number, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.number, {hash:{},inverse:self.noop,fn:self.program(16, program16, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n                  ";
   return buffer;
   }
-function program3(depth0,data) {
+function program16(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\r\n                	<li><a href=\"mapentries.html\" ";
@@ -187,30 +261,46 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program18(depth0,data) {
   
   
   return "\r\n              	Sorry, no results were found. Try again with a different search radius or location, or share some ratings yourself!\r\n              ";
   }
 
+function program20(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n            <div class=\"spacer10\"></div>\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\">\r\n                ";
+  stack1 = self.invokePartial(partials.radiusform, 'radiusform', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                </div>\r\n            </div>\r\n            ";
+  return buffer;
+  }
+
   stack1 = self.invokePartial(partials.header, 'header', depth0.title, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n\r\n<div class=\"container-fluid\">\r\n            <div class=\"row-fluid\">\r\n                <div class=\"span8 offset2 question_background\">\r\n                    <h5>\r\n                    There is a total of "
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " rating(s) within ";
-  if (stack2 = helpers.radius) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.radius; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + " km of the starting point\r\n                    </h5>\r\n                </div>\r\n            </div>\r\n            \r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n                <div class=\"span8 offset2 question_background\">\r\n                    <h5>\r\n                    Select the type of location to view, or try again with a different search radius\r\n                    </h5>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\">\r\n              ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "\r\n\r\n<div class=\"container-fluid\">\r\n            <div class=\"row-fluid\">\r\n                <div class=\"span8 offset2 question_background\">\r\n\r\n                ";
+  stack1 = helpers.unless.call(depth0, depth0.infiniteRadius, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                ";
+  stack1 = helpers['if'].call(depth0, depth0.infiniteRadius, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                </div>\r\n            </div>\r\n            \r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n                <div class=\"span8 offset2 question_background\">\r\n                    <h5>\r\n                    Select the type of location to view";
+  stack1 = helpers.unless.call(depth0, depth0['default'], {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n                    \r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\">\r\n              ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number), {hash:{},inverse:self.noop,fn:self.program(14, program14, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\r\n              ";
-  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(18, program18, data),data:data};
   if (stack2 = helpers['else']) { stack2 = stack2.call(depth0, options); }
   else { stack2 = depth0['else']; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   if (!helpers['else']) { stack2 = blockHelperMissing.call(depth0, stack2, options); }
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\r\n              </div>\r\n            </div>\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\"> \r\n                <form style=\"margin:0\" class=\"form-search\">\r\n                    <label class=\"control-label\"><h4>Find a location within...</h4></label>\r\n                    <div class=\"controls\">\r\n                      <label class=\"radio inline\" for=\"radio1\">\r\n                        <input type=\"radio\" id=\"radio1\" name=\"radius_group\" value=\"10\"> 10 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio2\">\r\n                        <input type=\"radio\" id=\"radio2\" name=\"radius_group\" value=\"20\"> 20 km\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"radio3\">\r\n                        <input type=\"radio\" id=\"radio3\" name=\"radius_group\" value=\"50\"> 50 km\r\n                      </label><br><br>\r\n                      <!--\r\n                      <label class=\"radio inline\" for=\"radio4\">\r\n                        <input type=\"radio\" id=\"radio4\" name=\"radius_group\" value=\"all\"> Everywhere\r\n                      </label><br> -->\r\n                     <button type=\"submit\" id=\"apply\" class=\"btn btn-primary\" >APPLY</button>\r\n                    </div> \r\n                </form>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n";
+  buffer += "\r\n              </div>\r\n            </div>\r\n\r\n            ";
+  stack2 = helpers.unless.call(depth0, depth0['default'], {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n\r\n\r\n        </div>\r\n\r\n";
   stack2 = self.invokePartial(partials.modal, 'modal', depth0, helpers, partials, data);
   if(stack2 || stack2 === 0) { buffer += stack2; }
   return buffer;

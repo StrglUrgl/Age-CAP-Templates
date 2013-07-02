@@ -18,6 +18,13 @@
                 font-family: Helvetica, Arial, Sans-Serif;
             }
 
+            #tryitmain {
+                width:300px;
+                height:50px;
+                font-size:20px;
+                padding-top: 15px;
+            }
+
             @media (min-width: 979px){
 
                 body {
@@ -36,6 +43,14 @@
                 #phone-pic{
                     width:500px;
                 }
+
+                #tryitmain {
+                width:auto;
+                height:auto;
+                padding: 15px;
+            }
+
+
             }
         </style>
         <link rel="stylesheet" href="css/bootstrapresponsive.min.css">
@@ -86,7 +101,7 @@
                 <p>Try it out today and make <i>your</i> city more welcoming to seniors!</p>
 
                 <div class="spacer10"></div>
-                <p><a href="index.html" class="btn btn-inverse btn-block" style="width:300px;height:50px;font-size:20px;padding-top::;px">Try it now!</a></p>
+                <p><a href="index.html" class="btn btn-inverse btn-block" id="tryitmain">Try it now!</a></p>
             </div>
 
             <!-- Example row of columns -->
@@ -134,12 +149,12 @@
                 <h1>Contact</h1>
                 <div class="spacer10"></div>
                 <a href="http://www.iatsl.org"><img src="iatsl.png" class="pull-right img-circle" style="height:80px;"></a>
-                <p><strong>Age-CAP</strong> was created by a <a href="http://www.iatsl.org">multi-disciplinary team</a> from the <a href="http://www.uhn.ca/TorontoRehab">Toronto Rehabilitation Institute</a>, the <a href="http://www.uhn.ca/Research/Pages/default.aspx">University Health Network</a> and the <a href="http://www.research.utoronto.ca/">University of Toronto</a>.</p><p>Feedback or questions: <a href="mailto:iatsl@utoronto.ca?Subject=Age-CAP%20Feedback">iatsl@utoronto.ca</p>
+                <p><strong>Age-CAP</strong> was created by a <a href="http://www.iatsl.org">multi-disciplinary team</a> from the <a href="http://www.uhn.ca/TorontoRehab">Toronto Rehabilitation Institute</a>, the <a href="http://www.uhn.ca/Research/Pages/default.aspx">University Health Network</a> and the <a href="http://www.research.utoronto.ca/">University of Toronto</a>.</p><p>Please mail feedback or questions to iatsl@utoronto.ca</p>
               
             </div>
 
             <footer>
-                <p>&copy; Company 2012</p>
+                <p>&copy; University of Toronto 2013</p>
             </footer>
 
         </div> <!-- /container -->
@@ -154,10 +169,6 @@
                 console.log(containerheight);
                 $("#outerBox").children().css("height",containerheight);});
         </script>
-
-
-        
-Age-CAP
 </script><script src="js/main.js"></script>
 
     </body>
