@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr262respond110min.js"></script>
         <link rel="stylesheet" href="css/map.css">
+        <link rel="stylesheet" href="css/spinner.css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -96,6 +97,37 @@
    End Modal Code
    ========================================================================== -->
 
+         <!-- ==========================================================================
+  Loading Code
+   ========================================================================== -->
+
+        <div id="loadingModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">  
+          <div class="modal-body" style="text-align:center; margin-right:auto; margin-left:auto;">
+              <div id="floatingCirclesG">
+              <div class="f_circleG" id="frotateG_01">
+              </div>
+              <div class="f_circleG" id="frotateG_02">
+              </div>
+              <div class="f_circleG" id="frotateG_03">
+              </div>
+              <div class="f_circleG" id="frotateG_04">
+              </div>
+              <div class="f_circleG" id="frotateG_05">
+              </div>
+              <div class="f_circleG" id="frotateG_06">
+              </div>
+              <div class="f_circleG" id="frotateG_07">
+              </div>
+              <div class="f_circleG" id="frotateG_08">
+              </div>
+              </div> 
+            <h4>Loading...</h4>
+          </div>
+        </div>
+<!-- ==========================================================================
+   End Loading Code
+   ========================================================================== -->
+
     <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
   <script src="phonegap.js"></script>
   <script type="text/javascript">
@@ -153,6 +185,9 @@
    }
 
    function initialize(position) {
+
+    $('#loadingModal').modal('show');
+
     pinColor = "50C264";
     var pinImageGreen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
         new google.maps.Size(21, 34),
@@ -178,6 +213,10 @@
 
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+    google.maps.event.addListenerOnce(map, 'idle', function(){
+       $('#loadingModal').modal('hide');
+    });
+    
     marker = new google.maps.Marker({
       position:geo_location,
       icon: pinImageGreen,
