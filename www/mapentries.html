@@ -138,6 +138,7 @@
 <script>
     
 $('#loadingModal').modal('show');
+alert("should show...");
 
 var pinColor = "FE7569";
 var pinImageRed = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
@@ -235,6 +236,8 @@ function getEntries(){
 
       google.maps.event.addListenerOnce(manasmap, 'idle', function(){
        $('#loadingModal').modal('hide');
+       alert("should hide...");
+
         });
     
       function listenMarker (mark, i)
