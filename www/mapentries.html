@@ -179,7 +179,6 @@ function getEntries(){
     message = "Viewing "+name+" Locations Worldwide";
   }
 
-
   $("#headline").html(message);
 
   if (radius == "all")
@@ -238,28 +237,6 @@ function getEntries(){
        $('#loadingModal').modal('hide');
         });
     
-      for (i=0;i<resultsArray[0].length;i++){
-          var currentLatitude = resultsArray[1][i];
-          var currentLongitude =resultsArray[2][i];
-          
-          var latlng_m = new google.maps.LatLng(currentLatitude, currentLongitude);
-          
-          markerOptions = {
-                            position: latlng_m,
-                            map: manasmap,
-                            title: resultsArray[0][i],
-                            shadow: pinShadow,
-                            icon: pinImageGreen
-                          }
-
-          if(Number(resultsArray[3][i]) < 3.0)
-          {
-            markerOptions["icon"] = pinImageRed;
-          }
-
-          marker[i] = new google.maps.Marker(markerOptions);
-
-
       function listenMarker (mark, i)
         {
           
@@ -281,48 +258,39 @@ function getEntries(){
           
         } 
             
+      for (i=0;i<resultsArray[0].length;i++){
+          var currentLatitude = resultsArray[1][i];
+          var currentLongitude =resultsArray[2][i];
+          
+          var latlng_m = new google.maps.LatLng(currentLatitude, currentLongitude);
+          
+          markerOptions = {
+                            position: latlng_m,
+                            map: manasmap,
+                            title: resultsArray[0][i],
+                            shadow: pinShadow,
+                            icon: pinImageGreen
+                          }
+
+          if(Number(resultsArray[3][i]) < 3.0)
+          {
+            markerOptions["icon"] = pinImageRed;
+          }
+
+          marker[i] = new google.maps.Marker(markerOptions);
+
         mark = marker[i];
         listenMarker(mark,i); 
         }    
       }//else finish
     }//This is the end of populateMap func.
-return resultsArray;
-}
 
+return resultsArray;
+
+}
 
 getEntries(); 
 
 </script>
-
-
-
-    <!--script>
-    var mapOptions = {
-    center: new google.maps.LatLng(43.707842,-79.393473),
-    zoom: 12,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    var markerOptions = {
-        position: new google.maps.LatLng(43.707842,-79.393473),
-        map: map
-    };
-    var marker = new google.maps.Marker(markerOptions);
-    marker.setMap(map);
-
-    var infoWindowOptions = {
-        content: '<div id="content"> <h4>Central Eglinton Community Centre</h4> This location has 1 rating(s).<br> Average score is <strong>3.5</strong></div>' +
-        '<div class="spacer10"></div><a href="view_ratings.html" class="btn btn-primary">View Ratings</a>'
-    };
-
-    var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-    google.maps.event.addListener(marker,'click',function(e){
-      
-      infoWindow.open(map, marker);
-      
-    });
-    </script-->
-
     </body>
 </html>
