@@ -79,7 +79,7 @@
   <button name="id_btns" id="q1" class="btn btn-large btn-primary test">I am a senior</button> 
   <button name="id_btns" id="q2" class="btn btn-large btn-primary test">I am providing care to a senior</button>
   <button name="id_btns" id="q3" class="btn btn-large btn-primary test">I am working with a senior</button>
-  <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding for a senior</button>
+  <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding fgitor a senior</button>
   <button name="id_btns" id="q5" class="btn btn-large btn-primary test">I prefer not to say</button>
   <button name="id_btns" id="q6" cl ass="btn btn-large btn-primary test">Other</button>
 </div>
@@ -120,22 +120,26 @@
 <script src="js/main.js"></script>
 
         <script type="text/javascript">
+
         $("#submit").click(function(){
+
+          //this page stores a random unique id
+          //each browser has its own userID, allowing us to associate ratings with users
 
           if (!localStorage.getItem("userID"))
           {
+            //this function generates a pseudo-random id each time it is called
             UUID = function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3).replace(/[018]/g,b)};
             uuid = UUID();
             localStorage.setItem("userID", uuid);
-            //console.log(uuid)
           }
 
           else
           {
             uuid = localStorage.getItem("userID");
-            //console.log(uuid);
           }
 
+          //then, we store the UUID and the information about the user in the database
           checked = $('.active').attr("id");
           if (!checked)
           {
@@ -143,8 +147,8 @@
           }
           submission = {uuid:uuid, checked:checked};
           $.post('http://142.150.169.179/user_ident.php', submission, function(data){
-            //alert(data); 
             window.location.href = localStorage.getItem("trailingPage")
+            //then, we proceed to either rate or view a location
           });
 
          
