@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
     <head>
         <meta charset="utf-8">
@@ -37,16 +37,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-
               <div id="back-btn"> <button class="btn btn-primary" onClick="history.go(-1);return true;">BACK</button> </div>
               <a id="page-title" class="brand" href="#">Location Details</a>
-
               <div class="nav-collapse collapse">
                 <ul class="nav">
-                  <li><a href="index.html">Home <span class="icon-home"></span></a></li>
-                  
-
-<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li><a href="index.html">Home <span class="icon-home"></span></a></li>                  
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -79,9 +75,9 @@
   <button name="id_btns" id="q1" class="btn btn-large btn-primary test">I am a senior</button> 
   <button name="id_btns" id="q2" class="btn btn-large btn-primary test">I am providing care to a senior</button>
   <button name="id_btns" id="q3" class="btn btn-large btn-primary test">I am working with a senior</button>
-  <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding fgitor a senior</button>
+  <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding for a senior</button>
   <button name="id_btns" id="q5" class="btn btn-large btn-primary test">I prefer not to say</button>
-  <button name="id_btns" id="q6" cl ass="btn btn-large btn-primary test">Other</button>
+  <button name="id_btns" id="q6" class="btn btn-large btn-primary test">Other</button>
 </div>
 <div class="spacer5"></div>
 <div class="btn-toolbar pagination-centered">
@@ -117,7 +113,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
         <script src="js/vendor/bootstrap.min.js"></script>
         
-<script src="js/main.js"></script>
+        <script src="js/main.js"></script>
 
         <script type="text/javascript">
 
@@ -146,9 +142,11 @@
             checked = "unset";
           }
           submission = {uuid:uuid, checked:checked};
+
           $.post('http://142.150.169.179/user_ident.php', submission, function(data){
             window.location.href = localStorage.getItem("trailingPage")
-            //then, we proceed to either rate or view a location
+            // we send the gathered information to the database
+            // then, we proceed to either rate or view a location
           });
 
          

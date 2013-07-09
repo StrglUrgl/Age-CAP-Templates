@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
  <head>
         <meta charset="utf-8">
@@ -30,7 +30,6 @@
 
         <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
-
             <div class="container-fluid" id="header-container">
             
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -41,13 +40,10 @@
 
               <div id="back-btn"> <button class="btn btn-primary" onClick="history.go(-1);return true;">BACK</button> </div>
               <a id="page-title" class="brand">View Results</a>
-
               <div class="nav-collapse collapse">
                 <ul class="nav">
                   <li><a href="index.html">Home <span class="icon-home"></span></a></li>
-                  
-
-<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -130,6 +126,11 @@
 
   <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
   <script src="phonegap.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
+  <script src="js/vendor/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/map.js"></script>
   <script type="text/javascript">
 
   //Declaring all these global variables is ugly, but it gets the map to work.
@@ -139,51 +140,12 @@
   var map;
   var resultsArray = {};
 
-  function resultsToArray(components){
-      i = 0; street =""; number = ""; intersection = "";
-      for(j=components.length; i<j; i++){
-        type = components[i].types[0];
-        if (type == "country"){
-          resultsArray["country"] = components[i].long_name;
-        } 
-        else if (type == "locality"){
-          resultsArray["city"] = components[i].long_name;
-        }
-        else if (type == "administrative_area_level_1"){
-          resultsArray["state"] = components[i].long_name;
-        }
-        else if (type == "postal_code"){
-          resultsArray["postal_code"] = components[i].long_name;
-        }
-        else if (type == "route"){
-            street = components[i].long_name;
-        }
-        else if (type == "street_number"){
-            number = components[i].long_name;
-        }
-        else if (type == "intersection"){
-            intersection = components[i].long_name;
-        }
-      }
-      if (street && number) {
-        resultsArray["address"] = number + " " + street;
-      }
-      else if (intersection) {
-        resultsArray["address"] = intersection;
-      }
-      else if (street){
-        resultsArray["address"] = street;
-      }
-      console.log(resultsArray);
-      return resultsArray;
-    }
-
   function codeLatLng(curr_pos, marker) {
     geocoder.geocode({'latLng': curr_pos}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[0]) {
 
-          resultsToArray(results[0].address_components);
+          resultsToArray(results[0].address_components, resultsArray);
 
           infowindow.setContent('<div><h5>'+ results[0].formatted_address + 
            '<h5></div><br>'+
@@ -195,7 +157,6 @@
           "<a class='btn btn-inverse' href='selectlanding.html' aria-hidden='true'>Dismiss</a>" +"/div");
 
           infowindow.open(map, marker);
-
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map, marker);
           }); 
@@ -218,11 +179,8 @@
     });
   }
 
-
-   navigator.geolocation.getCurrentPosition(initialize, onError, {enableHighAccuracy:true, timeout: 5000, maximumAge: Infinity});
-  
-   function onError (positionError){
-
+  function onError (positionError){
+    $('#loadingModal').modal('hide');
     alert(positionError.message);
 
     $("#mapcontainer").html("<h5>Sorry, Geolocation is not enabled for your device.</h5>"+
@@ -230,29 +188,12 @@
                             '<a class="btn btn-primary" href="mapcurrent.html">Reload Page</a>'+
                             '<a class="btn btn-primary" href="selectlanding.html">Other Entry Methods</a>'+"</div>");
     
-   }
+  }
 
-   function initialize(position) {
+  function initialize(position) {
 
-    $('#loadingModal').modal('show');
-    
-    pinColor = "50C264";
-    var pinImageGreen = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-        new google.maps.Size(21, 34),
-        new google.maps.Point(0,0),
-        new google.maps.Point(10, 34));
-
-    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
-        new google.maps.Size(40, 37),
-        new google.maps.Point(0, 0),
-        new google.maps.Point(12, 35));
-    
-    lat= position.coords.latitude;
-    lng= position.coords.longitude;
-    resultsArray["lat"] = lat;
-    resultsArray["lng"] = lng;
-    geo_location=new google.maps.LatLng(lat, lng);
-
+    starting_coords={lat:position.coords.latitude, lng:position.coords.longitude};
+    geo_location=new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var mapOptions = {
       center:geo_location,
@@ -261,30 +202,26 @@
     };
 
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
     google.maps.event.addListenerOnce(map, 'idle', function(){
        $('#loadingModal').modal('hide');
     });
-
-
+    
     marker = new google.maps.Marker({
       position:geo_location,
-      icon: pinImageGreen,
-      shadow: pinShadow
+      icon: getPinImage("50C264"),
+      shadow: getPinShadow()
 
     });
 
     marker.setMap(map);
     codeLatLng(geo_location, marker);
+  }
 
+  $('#loadingModal').modal('show');
+  navigator.geolocation.getCurrentPosition(initialize, onError, {enableHighAccuracy:true, timeout: 5000, maximumAge: Infinity});
+  
     //0383767000394439
-
-}
+ 
    </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
-    <script src="js/vendor/bootstrap.min.js"></script>
-    
-<script src="js/main.js"></script>
     </body>
 </html>
