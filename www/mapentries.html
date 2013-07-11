@@ -47,7 +47,7 @@
                   <li><a href="index.html">Home <span class="icon-home"></span></a></li>
                   
 
-<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -180,6 +180,10 @@ function getEntries(){
   }
 
   $("#headline").html(message);
+
+//I don't like duplicating code, but doing this over again is actually faster than storing 
+//the dataArray object using the localStorage object, for some reason
+//...should turn this code into a function call at some point
 
   if (radius == "all")
   {

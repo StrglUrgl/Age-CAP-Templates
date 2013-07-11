@@ -8,6 +8,68 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
   return "<div class=\"question_background\">\r\n<h4 style=\"color:white\">If you have any additional comments, please share them here:</h4> \r\n<textarea rows=\"4\" class=\"span12\" id=\"comment\"></textarea>\r\n</div>\r\n<div class=\"percent-spacer\"></div>";
   });
+templates['entrieslist'] = template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.partials; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "  \r\n		<h3>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\r\n	    <table class=\"table table-bordered linktable\" style=\"color:white;\">\r\n		    <tr class=\"meta\">\r\n			    <td>Name</td>\r\n			    <td>Score</td>\r\n		    </tr>\r\n\r\n			";
+  stack1 = helpers.each.call(depth0, depth0.entries, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n\r\n		</table>\r\n\r\n    	<div class=\"spacer10\"></div>\r\n		";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n			";
+  stack1 = helpers.unless.call(depth0, depth0.more, {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n			";
+  return buffer;
+  }
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n			    <tr class=\"entry\" id=\"";
+  if (stack1 = helpers.path) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.path; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\r\n					    <td><a href=\"viewratingfromtemplate.html\"><h5>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h5></a></td>  \r\n					    <td><h5>";
+  if (stack1 = helpers.avg) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.avg; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h5></td> \r\n			    </tr>\r\n			";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\r\n			<tr class=\"more\">\r\n				<td colspan=\"2\">\r\n					<h5>More...</h5>\r\n				</td>\r\n			</tr>\r\n			";
+  }
+
+  stack1 = self.invokePartial(partials.header, 'header', depth0.title, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row-fluid\">\r\n        <div class=\"span8 offset2 question_background\">\r\n        	<p>dslkfda;sdlfka;lsfdk</p>\r\n      </div>\r\n\r\n    </div>\r\n   	<div class=\"spacer10\"></div>\r\n	    <div class=\"row-fluid\">\r\n	      <div class=\"span8 offset2 question_background\">   \r\n	      ";
+  stack1 = helpers.each.call(depth0, depth0.categories, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n\r\n		    </div>\r\n		</div>\r\n	\r\n</div>\r\n\r\n";
+  stack1 = self.invokePartial(partials.modal, 'modal', depth0, helpers, partials, data);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  return buffer;
+  });
 templates['header'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Handlebars.helpers; data = data || {};

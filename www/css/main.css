@@ -1,6 +1,8 @@
 /* ==========================================================================
-   Author's custom styles
+   These are the custom styles defined for Age-CAP
+   They're a bit haphazard
    ========================================================================== */
+
 
 	@import css/bootstrap.min.css;
 	div.question_background
@@ -178,3 +180,28 @@ border-radius: 6px;
 padding:20px;
 }
 
+.linktable > tbody > tr:hover,
+.linktable > tbody > tr:focus,
+.linktable > tbody > tr:active{
+
+  text-decoration: none;
+  background-color: #eeeeee;
+  color: rgb(0, 125, 204)
+}
+
+.linktable > tbody > .meta:hover,
+.linktable > tbody > .meta:focus,
+.linktable > tbody > .meta:active{
+
+  background-color:inherit;
+  color: inherit;
+
+}
+
+.linktable > tbody > tr > td > a {
+
+  text-decoration: none;
+  background-color:inherit;
+  color: inherit;
+
+}

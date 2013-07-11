@@ -8,25 +8,25 @@ function connectPrompt()
 
 function addPadding()
 {
-    $('.nav-collapse').on('show', function () { 
-      $(document.body).css({"padding-top":"230px"});});
+  $('.nav-collapse').on('show', function () { 
+    $(document.body).css({"padding-top":"230px"});});
 
-    $('.nav-collapse').on('hide', function () {
-      $(document.body).css({"padding-top":"60px"});});
+  $('.nav-collapse').on('hide', function () {
+    $(document.body).css({"padding-top":"60px"});});
 }
 
 function makeBig()
 {
-        $("h5").css({"font-size":"18px"}); 
-        $("p").css({"font-size":"16px"}); 
-        $("label").css({"font-size":"18px"}); 
+  $("h5").css({"font-size":"18px"}); 
+  $("p").css({"font-size":"16px"}); 
+  $("label").css({"font-size":"18px"}); 
 }
 
 function makeSmall()
 {
-        $("h5").css({"font-size":"100%"});  
-        $("p").css({"font-size":"14px"}); 
-        $("label").css({"font-size":"17px"});
+  $("h5").css({"font-size":"100%"});  
+  $("p").css({"font-size":"14px"}); 
+  $("label").css({"font-size":"17px"});
 }
 
 function toggleText()
