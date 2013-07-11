@@ -1,138 +1,104 @@
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-<title>Age-CAP</title>
-
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrapresponsive.min.css">
-<link rel="stylesheet" href="css/main.css">
-
-<script src="js/vendor/modernizr262respond110min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
-<script type="text/javascript" src="Handlebars.js"></script>
-<script type="text/javascript" src="templates/templates.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Age-CAP</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrapresponsive.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr262respond110min.js"></script>
 </head>
-
 <body>
+    <div class="shoesNav container-fluid"></div>    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
+    <script type="text/javascript" src="Handlebars.js"></script>
+    <script type="text/javascript" src="templates/templates.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/bounding.js"></script>
+    <script src="js/main.js"></script>
+    <script>
 
-<div class="shoesNav container-fluid"></div>    
+        function getFromValue(value, dictionary){
 
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/bounding.js"></script>
-
-
-<script src="js/main.js"></script>
-<script>	
-
-list = {list:["community","crosswalks","libraries","public_transit","restaurants","shopping_malls"]};
-coords = JSON.parse(localStorage.getItem("starting_coords")); 
- radius = localStorage.getItem("radius");
-  if (radius != "all")
-  {
-    radius = Number(radius);
-  }
-
-Handlebars.registerHelper("idFromName", function(name, options) {
-
-    id = undefined;
-
-    dict = {community:"Community Centre",
-         crosswalks:"Crosswalk",
-         libraries:"Library",
-         public_transit:"Public Transit Route",
-         restaurants:"Restaurant",
-         shopping_malls:"Shopping Mall",
-         all:"All"
-         };
-
-    for(var key in dict)
-    {
-        if (dict[key] == name){
-            id = key;
+            for(var key in dictionary){
+                if (dictionary[key] == value){
+                    return key;
+                }
+            }
+            return undefined;
         }
-    }
 
-    return "id="+id;
-    });
+        function displayPage(data){
 
-if (radius == "all")
-{
-  dataArray={list:list, infiniteRadius:1};
-}
-else
-{
-  var boundingArray = boundingCoordinates(radius, 6371, coords["lat"], coords["lng"]);
-  var dataArray = {list:list, minLat:boundingArray["minLat"], maxLat:boundingArray["maxLat"], minLng:boundingArray["minLon"], maxLng:boundingArray["maxLon"]}
-}
+            Handlebars.registerHelper("idFromName", function(name, options) {
 
-$.post('http://142.150.169.179/results_list.php', dataArray, function(data){
-            //$("#ModalText").html(data);
-            //$("#myModal").modal('show');
+                id = '';
+                dict = JSON.parse(localStorage.getItem("names"));
+
+                for(var key in dict){
+                    if (dict[key] == name){
+                        id = key;
+                    }
+                }
+                return "id="+id;
+            });
+
+            Handlebars.partials = Handlebars.templates;
+            var compiledTemplate = Handlebars.templates['resultslist'];
+
             categories = JSON.parse(data);
             j=categories.length;
-
-            names = JSON.parse(localStorage.getItem("names"));
-            for(i=0;i<j;i++)
-            {
-            	categories[i]["name"] = names[categories[i]["name"]];
-              categories[i]["number"] = Number(categories[i]["number"])
-
+            
+            for(i=0;i<j;i++){
+                categories[i]["name"] = names[categories[i]["name"]];
+                categories[i]["number"] = Number(categories[i]["number"])
             }
-            displayPage();
-          });
 
-function displayPage(){
-	Handlebars.partials = Handlebars.templates;
-	var compiledTemplate = Handlebars.templates['resultslist']; 
+            context = {number: categories.length, 
+                     title:'Results', 
+                     radius:radius,
+                     infiniteRadius: (radius == "all"),
+                     categories:categories, 
+                     singular:(categories.length == 1), 
+                     default: Number(localStorage.getItem("default"))
+                   };
+                            
+            $(".shoesNav").append(compiledTemplate(context));
+        }
 
-	/*context = {number:0, title:'Results', radius:10, categories:[{name:"All", number:1},
-	                                                                {name:"Community Centre", number:1},
-	                                                                {name:"Crosswalk", number:1},
-	                                                                {name:"Library", number:1},
-	                                                                {name:"Public Transit", number:1},
-	                                                                {name:"Restaurants", number:1},
-	                                                                {name:"Shopping Malls", number:1}]};*/
+        function addMovingParts(){
+            //this executes the functions from main.js after the template has loaded
+            main();
 
+            $("#apply").click(function(){
+                new_radius = $('[name="radius_group"]:checked').attr("value");
+                localStorage.setItem("radius", new_radius);
+            })
+            $('[name="categories_group"]').click(function(){
+                var clicked = $(this);
+                localStorage.setItem("tableToView", clicked.attr("id"));
+                localStorage.setItem("typeToView", clicked.attr("id"));
+            })
+        }
+      
+        var coords = JSON.parse(localStorage.getItem("starting_coords")); 
+        var radius = localStorage.getItem("radius");
+        var names = JSON.parse(localStorage.getItem("names"));
+      
+        if (radius == "all"){
+          dataArray={names:names, infiniteRadius:1};
+        }
 
+        else{
+          var boundingArray = boundingCoordinates(Number(radius), 6371, coords["lat"], coords["lng"]);
+          var dataArray = {names:names, minLat:boundingArray["minLat"], maxLat:boundingArray["maxLat"], minLng:boundingArray["minLon"], maxLng:boundingArray["maxLon"]}
+        }
 
-	context = {number: categories.length, 
-             title:'Results', 
-             radius:radius,
-             infiniteRadius: (radius == "all"),
-             categories:categories, 
-             singular:(categories.length == 1), 
-             default: Number(localStorage.getItem("default"))
-           };
-			           
-	var html = compiledTemplate(context);
-	$(".shoesNav").append (html);
+        $.post('http://142.150.169.179/results_list.php', dataArray, function(data){
+            displayPage(data);
+            addMovingParts();
+        });
 
-  main();
-
-    $("#apply").click(function(){
-        new_radius = $('[name="radius_group"]:checked').attr("value");
-        localStorage.setItem("radius", new_radius);
-    })
-    $('[name="categories_group"]').click(function(){
-        var clicked = $(this);
-        localStorage.setItem("tableToView", clicked.attr("id"));
-        localStorage.setItem("typeToView", clicked.attr("id"));
-    })
-}
-
-function getFromValue(value, dictionary){
-
-	for(var key in dictionary)
-    {
-    	if (dictionary[key] == value){
-    		return key;
-    	}
-    }
-    return undefined;
-}
-</script>
+    </script>
 </body>

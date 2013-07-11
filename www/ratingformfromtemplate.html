@@ -64,8 +64,8 @@
     //returns the average of the filtered array
 
     numericalList = context.filter(function(x) {return (typeof(x) == 'number');})
+    if (!numericalList.length) {return 0};
     sum = numericalList.reduce(function(a,b) {return a + b;});
-
     return sum / numericalList.length;
 
       }
@@ -111,7 +111,6 @@
   	$.post('http://142.150.169.179/rating_form.php', submission, function(data){
               window.location.href = "rateagain.html";
             });
-
 
   });
 
