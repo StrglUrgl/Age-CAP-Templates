@@ -28,7 +28,7 @@ function resultsToArray(components, resultsArray){
           resultsArray["state"] = components[i].long_name;
         }
         else if (type == "postal_code"){
-          resultsArray["postal_code"] = components[i].long_name;
+          resultsArray["postal"] = components[i].long_name;
         }
         else if (type == "route"){
             street = components[i].long_name;

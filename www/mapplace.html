@@ -158,7 +158,7 @@
               google.maps.event.addListener(infowindow, 'domready', function() {
                 $("#start-button").click(function() {
                   resultsArray["name"] = $("#map-form").val();
-                  localStorage.setItem("postalCodeToRate", resultsArray["postal_code"]);
+                  localStorage.setItem("postalCodeToRate", resultsArray["postal"]);
                   localStorage.setItem("ratingLocation", JSON.stringify(resultsArray));
                   window.location.href = 'ratingformfromtemplate.html';
                 });

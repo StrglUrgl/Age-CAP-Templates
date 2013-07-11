@@ -25,6 +25,12 @@
 <script src="js/vendor/bootstrap.min.js"></script>
 <script>
 
+var title = localStorage.getItem("nameToView");
+var postal_code = localStorage.getItem("postalCodeToView");
+var type = localStorage.getItem("typeToView");
+var typeName = JSON.parse(localStorage.getItem("names"))[type];
+var questions = JSON.parse(localStorage.getItem("questions"))[type];
+
 Handlebars.registerHelper("getNumber", function(context, options) {
       if (options.data) return options.data["index"] + 1;
       else return "";
@@ -35,103 +41,37 @@ Handlebars.registerHelper("getText", function(context, questions, options) {
     });
 
 Handlebars.registerHelper("getArrAvg", function(context, options) {
-      sum = 0;
 
-      n = context.length;
-       if (n == 0) 
-      	{return "Error";}
+    numericalList = context.filter(function(x) {return (typeof(x) == 'number');})
+    if (!numericalList.length) {return 0};
+    sum = numericalList.reduce(function(a,b) {return a + b;});
+    return Math.round((sum / numericalList.length)*10)/10; 
 
-      size = n;
-
-      for (i=0;i<n;i++)
-      	{
-      		score = context[i];
-  			if (typeof(score) == 'number')
-  			{
-  				sum += score;
-  			}
-  			else
-  			{
-  				size -= 1;
-  			}
-      	};
-      return Math.round((sum / size)*10)/10; 
-    });
+  });
 
 Handlebars.registerHelper("getLocAvg", function(context, options) {
 
-      sum = 0;
+    all = context.ratings
+                 .reduce(function(a,b) {c = {}; c.scores = a.scores.concat(b.scores); return c;})
+                 .scores;
 
-      m = context.ratings.length;
-      if (m == 0) 
-      	{return "Error";}
+    numericalList = all.filter(function(x) {return (typeof(x) == 'number');})
+    if (!numericalList.length) {return 0};
+    sum = numericalList.reduce(function(a,b) {return a + b;});
+    return Math.round((sum / numericalList.length)*10)/10; 
 
-      n = context.ratings[0].scores.length
-      size = m*n;
-
-      for (i=0;i<m;i++){
-      		for (j=0;j<n;j++){
-
-      			score = context.ratings[i].scores[j];
-
-      			if (typeof(score) == 'number') {
-      				sum += score;
-      			}
-
-      			else {
-      				size -= 1;
-      			}
-      		}
-      	};
-
-      return  Math.round((sum / size)*10)/10; 
-    });
-
+  });
 
 Handlebars.partials = Handlebars.templates;
-var compiledTemplate = Handlebars.templates['viewratings']; 
-
-var title = localStorage.getItem("nameToView");
-var postal_code = localStorage.getItem("postalCodeToView");
-var type = localStorage.getItem("typeToView");
-var typeName = JSON.parse(localStorage.getItem("names"))[type];
-var questions = JSON.parse(localStorage.getItem("questions"))[type];
-
+var compiledTemplate = Handlebars.templates['viewratings'];
 var ratings; $.post('http://142.150.169.179/view_ratings.php', {name:title, postal_code:postal_code, table:type}, function(data){
             ratings = JSON.parse(data);
             compile();
           });
 
 function compile() {
-  loco_ation =  {title:title, category:typeName, questions:questions, ratings:ratings};
-
-  /*{title:"Eglinton Community Centre", 
-
-  			  category:"Community Centre",
-
-  			  questions:["The building was accessible.",
-  					   "A seniors discount is offered on classes and memberships.", 
-  					   "There was suitable programming available for seniors", 
-  					   "There was visible and legible signage that directed me to the areas I wanted to use.",
-  					   "There is an opportunity for seniors to volunteer.",
-  					   "Employees and volunteers displayed age friendly attitudes.",
-  					   "Washrooms were accessible."],
-
-  			  ratings:[{scores: [1,2,3,4,5,6,7],
-  					  comments:"Ain't that some shit.",
-              date:"2012-06-04"},
-
-  					  {scores: [7,6,5,4,3,2,1],
-  					  comments:"Ain't that some shit.",
-              date:"2012-06-04"},
-
-  					  {scores: [7,7,7,7,7,7,7],
-  					  comments:"Love this Community Centre. A++ would knock over again.",
-              date:"2012-06-04"}
-  			]}*/
-
-  var html = compiledTemplate(loco_ation);
-  $(".shoesNav").append (html);
+  view_location =  {title:title, category:typeName, questions:questions, ratings:ratings};
+  $(".shoesNav").append (compiledTemplate(view_location));
   main();
 }
 </script>
