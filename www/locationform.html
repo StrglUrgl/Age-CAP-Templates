@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
     <head>
         <meta charset="utf-8">
@@ -30,7 +30,6 @@
 
         <div class="navbar navbar-fixed-top">
           <div class="navbar-inner">
-
             <div class="container-fluid" id="header-container">
             
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -41,13 +40,10 @@
 
               <div id="back-btn"> <button class="btn btn-primary" onClick="history.go(-1);return true;">BACK</button> </div>
               <a id="page-title" class="brand" href="#">Location Details</a>
-
               <div class="nav-collapse collapse">
                 <ul class="nav">
                   <li><a href="index.html">Home <span class="icon-home"></span></a></li>
-                  
-
-<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -64,7 +60,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span8 offset2 question_background">
-            <h4>Fill in the details of the location below</h4>
+            <h4>Fill in the details of the location below, completing as many fields as possible</h4>
         </div> 
     </div>
 
@@ -150,42 +146,46 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery191min.js"><\/script>')</script> <!--- failsafe to load up jQuery if the online copy is unavailable-->
         <script src="js/vendor/bootstrap.min.js"></script>
         
-<script src="js/main.js"></script>
+        <script src="js/main.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script>
         $("#submit-button").click(function() {
 
-        var ratingLocation = {name: $("#inputName").val(), address: $("#inputAddress").val(),
-                            city: $("#inputCity").val(), state: $("#inputProvince").val(), postal_code: $("#inputPostal").val(),
-                            country: $("#inputCountry").val()}
+          var ratingLocation = {name: $("#inputName").val(), address: $("#inputAddress").val(),
+                              city: $("#inputCity").val(), state: $("#inputProvince").val(), postal: $("#inputPostal").val(),
+                              country: $("#inputCountry").val()}
 
-        //localStorage.setItem("ratingLocation", JSON.stringify(ratingLocation)); 
 
-        //var dict = JSON.parse(localStorage.getItem("ratingLocation"));
+          //build a submission string from the user's information 
+          var submission = "";
 
-        var submission = "";
+          for (var key in ratingLocation){
+              if (ratingLocation[key]){
+                submission += ratingLocation[key] + " ";
+              }
+            }
 
-        for (var key in ratingLocation) {if (key){submission += ratingLocation[key] + ", ";}}
-        submission = $.trim(submission);
-        if (submission.charAt(submission.length -1 ) == ","){
-          submission = submission.slice(0, -1);}
+          //use the google maps geocoder to get a latitude and longitude corresponding
+          //to this address
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({"address": submission}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK){
 
-        console.log(submission);
+              ratingLocation["lat"] = results[0].geometry.location.jb;
+              ratingLocation["lng"] = results[0].geometry.location.kb;
 
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({"address": submission}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK){
+              //it would be good if the geocoder could fill in any blanks in the user submission
 
-            ratingLocation["lat"] = results[0].geometry.location.jb
-            ratingLocation["lng"] = results[0].geometry.location.kb
-
-            localStorage.setItem("ratingLocation", JSON.stringify(ratingLocation));
-            window.location.href = 'ratingformfromtemplate.html';
-          }
-          else {
-            alert("Location not found. Please ensure you have entered the address information correctly.")
-          }
-        });
+              //store the data and continue
+              localStorage.setItem("ratingLocation", JSON.stringify(ratingLocation));
+              window.location.href = 'ratingformfromtemplate.html';
+            }
+            else {
+              // this could be frustrating for the user if the location is not listed
+              // perhaps program in another routine that removes the name before attempting to geolocate
+              alert("Location not found. Please ensure you have entered the address information correctly.")
+            }
+          });
 
         });
         </script> 

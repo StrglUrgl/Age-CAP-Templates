@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
  <head>
         <meta charset="utf-8">
@@ -18,7 +18,7 @@
         <script src="js/detectmobilebrowser.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
+        <!--[if lt IE 7]
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
@@ -38,14 +38,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-
               <a id="page-title" class="brand">Home</a>
-
               <div id="collapse-div" class="nav-collapse collapse">
                 <ul class="nav">
-                  
-
-<li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
+                  <li> <a id="font-button">Change Font Size  <span class="icon-font"></span></a></li>
                   <li> <a href="feedback.html" id="feedback-button">Give Feedback  <span class="icon-thumbs-up"></span></a></li>
                   <li> <a href="#myModal" data-toggle="modal">About Age-CAP</a></li>
                 </ul>
@@ -75,15 +71,6 @@
                 </div>
             </div>
             <div class="spacer10"></div>
-            
-        <!-- <div class="row-fluid">
-                <div class="span8 offset2 question_background">
-                    <label class="checkbox">
-                      <input type="checkbox"><h5>If you wish to provide information and feedback on your experience with Age-CAP, please check this box before choosing to rate or read </h5>
-                    </label>
-
-                </div>
-            </div>   -->      
         </div>
 
 <!-- ==========================================================================
@@ -115,7 +102,9 @@
 
     if(!localStorage.getItem("starting_coords"))
     {
+      // We set some default values if there are none set already 
       localStorage.setItem("radius", "all");
+      //use Toronto because that's where the majority of ratings are
       localStorage.setItem("starting_coords", JSON.stringify({lat:43.707842,lng:-79.393473}));
       localStorage.setItem("default","1")
     }
@@ -124,9 +113,11 @@
 
     $("#rate").click(function (){
       if (userID){
+        //if a userID is already set, we don't pester them again
         window.location.href = "locationlanding.html";
       }
       else{
+        //otherwise, we use localStorage to remember which page they were heading for
         localStorage.setItem("trailingPage", "locationlanding.html");
         window.location.href = "userident.html";
      }
@@ -147,40 +138,5 @@
     
 <script src="js/main.js"></script>
     </body>
-</html>
-
-
-<!--
-
-GLOBAL
-
-* names, questions, trailingPage, radius=10 stored on page index.html
-* userID stored on page userident.html
-
-RATE
-
-* tableToRate and typeToRate are stored on page locationlanding.html (only one of these is neccessary)
-
-  CURRENT LOCATION
-  * ratingLocation is stored on page selectlanding.html
-  * submission complete !!
-
-  ANOTHER LOCATION
-  * ratingLocation is stored on page locationform.html
-
-  SELECT FROM MAP
-  * ratingLocation is stored on page mapplace.html
-
-  READ
-
-  CURRENT LOCATION
-  * starting_coords are stored on selectlandingread.html
-  * tableToView and typeToView are stored on page resultslistfromtemplate.html (only one of these is neccessary)
-  * nameToView and tableToView are stored on page mapentries.html
-
-  ANOTHER LOCATION
-
-  SELECT FROM MAP
-
--->
-
+</html> 
+  
