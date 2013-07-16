@@ -56,38 +56,38 @@
    End Navbar Code
    ========================================================================== -->
 
-<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8 offset2 question_background" style="text-align:center">
+                <h5>To aid us in tailoring Age-CAP to our users, please share a few details.</h5>
+                <p>DISCLAIMER: IATSL will never share this personal information.</p>
+            </div> 
+        </div>
+
+        <div class="spacer10"></div>  
+
     <div class="row-fluid">
-        <div class="span8 offset2 question_background" style="text-align:center">
-            <h5>To aid us in tailoring Age-CAP to our users, please share a few details.</h5>
-            <p>DISCLAIMER: IATSL will never share this personal information.</p>
-        </div> 
+    <div class="span8 offset2 question_background" style="text-align:center">
+      <h5>Please choose the category that best describes you.</h5>
+    <div class="spacer5"></div>
+    <div class="btn-toolbar pagination-centered">
+    <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
+      <button name="id_btns" id="q1" class="btn btn-large btn-primary test">I am a senior</button> 
+      <button name="id_btns" id="q2" class="btn btn-large btn-primary test">I am providing care to a senior</button>
+      <button name="id_btns" id="q3" class="btn btn-large btn-primary test">I am working with a senior</button>
+      <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding for a senior</button>
+      <button name="id_btns" id="q5" class="btn btn-large btn-primary test">I prefer not to say</button>
+      <button name="id_btns" id="q6" class="btn btn-large btn-primary test">Other</button>
+    </div>
+    <div class="spacer5"></div>
+    <div class="btn-toolbar pagination-centered">
+      <button id="submit" class="btn btn-large btn-danger">Submit</button>
+    </div>
     </div>
 
-    <div class="spacer10"></div>  
+    </div>   
 
-<div class="row-fluid">
-<div class="span8 offset2 question_background" style="text-align:center">
-  <h5>Please choose the category that best describes you.</h5>
-<div class="spacer5"></div>
-<div class="btn-toolbar pagination-centered">
-<div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-  <button name="id_btns" id="q1" class="btn btn-large btn-primary test">I am a senior</button> 
-  <button name="id_btns" id="q2" class="btn btn-large btn-primary test">I am providing care to a senior</button>
-  <button name="id_btns" id="q3" class="btn btn-large btn-primary test">I am working with a senior</button>
-  <button name="id_btns" id="q4" class="btn btn-large btn-primary test">I am responding for a senior</button>
-  <button name="id_btns" id="q5" class="btn btn-large btn-primary test">I prefer not to say</button>
-  <button name="id_btns" id="q6" class="btn btn-large btn-primary test">Other</button>
-</div>
-<div class="spacer5"></div>
-<div class="btn-toolbar pagination-centered">
-  <button id="submit" class="btn btn-large btn-danger">Submit</button>
-</div>
-</div>
-
-</div>   
-
-</div> <!-- /container -->
+    </div> <!-- /container -->
 
 <!-- ==========================================================================
   Modal Code
@@ -117,6 +117,41 @@
 
         <script type="text/javascript">
 
+          var isMobile = {
+              Android: function() {
+                  if (navigator.userAgent.match(/Android/i)){
+                    return "Android";
+                  }
+              },
+              BlackBerry: function() {
+                  if (navigator.userAgent.match(/BlackBerry|BB10/i)){
+                    return "BlackBerry";
+                  }
+              },
+              iOS: function() {
+                  if (navigator.userAgent.match(/iPhone|iPad|iPod/i)){
+                    return "iOS";
+                  }
+              },
+              Windows: function() {
+                  if (navigator.userAgent.match(/IEMobile/i)){
+                    return "Windows Phone";
+                  }
+              },
+
+              any: function() {
+                  mobile = (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+                  
+                  if (mobile){
+                    return mobile;
+                  }
+
+                  return "Desktop";
+
+              }
+          };
+
+          alert(isMobile.any());
         $("#submit").click(function(){
 
           //this page stores a random unique id

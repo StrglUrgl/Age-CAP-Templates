@@ -95,6 +95,8 @@
           var dataArray = {names:names, minLat:boundingArray["minLat"], maxLat:boundingArray["maxLat"], minLng:boundingArray["minLon"], maxLng:boundingArray["maxLon"]}
         }
 
+        localStorage.setItem("dataArray", JSON.stringify(dataArray));
+
         $.post('http://142.150.169.179/results_list.php', dataArray, function(data){
             displayPage(data);
             addMovingParts();

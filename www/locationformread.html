@@ -173,7 +173,6 @@
             starting_coords["lat"] = results[0].geometry.location.jb
             starting_coords["lng"] = results[0].geometry.location.kb
             console.log(starting_coords["lat"], starting_coords["lng"]);
-
             localStorage.setItem("starting_coords", JSON.stringify(starting_coords));
             localStorage.setItem("default","0");
             window.location.href = 'resultslistfromtemplate.html';
