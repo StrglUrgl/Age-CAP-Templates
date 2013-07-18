@@ -153,7 +153,6 @@
               }
           };
 
-          alert(isMobile.any());
         $("#submit").click(function(){
 
           //this page stores a random unique id
@@ -178,7 +177,8 @@
           {
             checked = "unset";
           }
-          submission = {uuid:uuid, checked:checked};
+
+          submission = {uuid:uuid, checked:checked, is_mobile:isMobile.any()};
 
           $.post('http://142.150.169.179/user_ident.php', submission, function(data){
             window.location.href = localStorage.getItem("trailingPage")
