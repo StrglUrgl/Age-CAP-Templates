@@ -6,7 +6,7 @@
 
                 {{#unless infiniteRadius}}
                     <h5>
-                    There {{#if singular}}is {{else}}are{{/if}} {{ categories.[0]/number}} rating{{#unless singular}}s{{/unless}} within {{radius}} km of the starting point
+                    There {{#if singular}}is {{else}}are{{/if}}{{categories.[0]/number}} rating{{#unless singular}}s{{/unless}} within {{radius}} km of the starting point
                     </h5>
                 {{/unless }}
                 {{#if infiniteRadius}}
@@ -24,7 +24,17 @@
                     <h5>
                     Select the type of location to view{{#unless default}}, or try again with a different search radius</h5>{{else}} or choose a starting point to view local ratings</h5>
                   <a href="selectlandingread.html" class="btn btn-primary">Starting Point</a>{{/unless}}
-                    
+
+                    <div class="controls">
+                      <label class="radio inline" style="padding-left:0px;">View as...</label>
+                      <label class="radio inline" for="map">
+                        <input type="radio" id="map" name="view_group" value="map" checked="checked"> Map
+                      </label>
+                      <label class="radio inline" for="text">
+                        <input type="radio" id="text" name="view_group" value="text"> Text
+                      </label>
+                    </div>
+
                 </div>
             </div>
 
@@ -36,7 +46,7 @@
                 <ul class="nav nav-tabs nav-stacked white-text">
                 {{#each categories}}
                 	{{#if number}}
-                	<li><a href="mapentries.html" {{idFromName name}} name="categories_group"><h5>{{name}} ({{number}})</h5></a></li>
+                	<li><a href="#" {{idFromName name}} name="categories_group"><h5>{{name}} ({{number}})</h5></a></li>
                 	{{/if}}
                   {{/each}}
                     </ul>

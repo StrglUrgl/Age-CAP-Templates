@@ -1,9 +1,16 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->  
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Age-CAP</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrapresponsive.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -60,7 +67,7 @@
                      radius:radius,
                      infiniteRadius: (radius == "all"),
                      categories:categories, 
-                     singular:(categories.length == 1), 
+                     singular:(categories[0].number == 1), 
                      default: Number(localStorage.getItem("default"))
                    };
                             
@@ -77,8 +84,11 @@
             })
             $('[name="categories_group"]').click(function(){
                 var clicked = $(this);
-                localStorage.setItem("tableToView", clicked.attr("id"));
                 localStorage.setItem("typeToView", clicked.attr("id"));
+                checked = $('[name="view_group"]:checked').attr("value");
+                if (checked == "text") window.location.href = "entrieslistfromtemplate.html"
+                else window.location.href = "mapentries.html"
+                console.log(checked);
             })
         }
       

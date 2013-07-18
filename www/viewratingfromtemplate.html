@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->  
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -5,7 +11,8 @@
   <title>Age-CAP</title>
 
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,9 +32,9 @@
 
     var title = localStorage.getItem("nameToView");
     var postal_code = localStorage.getItem("postalCodeToView");
-    var type = localStorage.getItem("typeToView");
-    var typeName = JSON.parse(localStorage.getItem("names"))[type];
-    var questions = JSON.parse(localStorage.getItem("questions"))[type];
+    var table = localStorage.getItem("tableToView");
+    var typeName = JSON.parse(localStorage.getItem("names"))[table];
+    var questions = JSON.parse(localStorage.getItem("questions"))[table];
 
     Handlebars.registerHelper("getNumber", function(context, options) {
           if (options.data) return options.data["index"] + 1;
@@ -62,7 +69,7 @@
 
     Handlebars.partials = Handlebars.templates;
     var compiledTemplate = Handlebars.templates['viewratings'];
-    var ratings; $.post('http://142.150.169.179/view_ratings.php', {name:title, postal_code:postal_code, table:type}, function(data){
+    var ratings; $.post('http://142.150.169.179/view_ratings.php', {name:title, postal_code:postal_code, table:table}, function(data){
                 ratings = JSON.parse(data);
                 compile();
               });

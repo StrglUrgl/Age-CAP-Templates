@@ -16,26 +16,43 @@ helpers = helpers || Handlebars.helpers; partials = partials || Handlebars.parti
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "  \r\n		<h3>";
+  buffer += " Within ";
+  if (stack1 = helpers.radius) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.radius; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " Kilometers ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  
+  return " worldwide ";
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "  \r\n	      \r\n\r\n		<h3>";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</h3>\r\n	    <table class=\"table table-bordered linktable\" style=\"color:white;\">\r\n		    <tr class=\"meta\">\r\n			    <td>Name</td>\r\n			    <td>Score</td>\r\n		    </tr>\r\n\r\n			";
-  stack1 = helpers.each.call(depth0, depth0.entries, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  stack1 = helpers.each.call(depth0, depth0.entries, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n\r\n		</table>\r\n\r\n    	<div class=\"spacer10\"></div>\r\n		";
   return buffer;
   }
-function program2(depth0,data) {
+function program6(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n			";
-  stack1 = helpers.unless.call(depth0, depth0.more, {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
+  stack1 = helpers.unless.call(depth0, depth0.more, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n			";
   return buffer;
   }
-function program3(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\r\n			    <tr class=\"entry\" id=\"";
@@ -54,16 +71,28 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program9(depth0,data) {
   
-  
-  return "\r\n			<tr class=\"more\">\r\n				<td colspan=\"2\">\r\n					<h5>More...</h5>\r\n				</td>\r\n			</tr>\r\n			";
+  var buffer = "", stack1;
+  buffer += "\r\n			<tr class=\"more\" id=\"";
+  if (stack1 = helpers.table) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.table; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\r\n				<td colspan=\"2\">\r\n					<h5>More...</h5>\r\n				</td>\r\n			</tr>\r\n			";
+  return buffer;
   }
 
   stack1 = self.invokePartial(partials.header, 'header', depth0.title, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row-fluid\">\r\n        <div class=\"span8 offset2 question_background\">\r\n        	<p>dslkfda;sdlfka;lsfdk</p>\r\n      </div>\r\n\r\n    </div>\r\n   	<div class=\"spacer10\"></div>\r\n	    <div class=\"row-fluid\">\r\n	      <div class=\"span8 offset2 question_background\">   \r\n	      ";
-  stack1 = helpers.each.call(depth0, depth0.categories, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row-fluid\">\r\n        <div class=\"span8 offset2 question_background\">\r\n        	<h4>Viewing ";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " Locations";
+  stack1 = helpers.unless.call(depth0, depth0.infiniteRadius, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</h4>\r\n        	   <div class=\"btn-group\">\r\n                <button class=\"btn btn-primary\">Options</button>\r\n                <button class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\">\r\n                  <span class=\"caret\"></span>\r\n                </button>\r\n                <ul class=\"dropdown-menu\">\r\n                    <li><a href=\"resultslistfromtemplate.html\">Alter Search Settings</a></li> \r\n                    <li><a href=\"selectlandingread.html\">Choose a New Starting Point</a></li>\r\n                    <li><a href=\"mapentries.html\">View Results as Map</a></li>\r\n                </ul>\r\n                </div>\r\n      	    </div>\r\n    </div>\r\n   	<div class=\"spacer10\"></div>\r\n	    <div class=\"row-fluid\">\r\n	      <div class=\"span8 offset2 question_background\">   \r\n	      ";
+  stack1 = helpers.each.call(depth0, depth0.categories, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n\r\n		    </div>\r\n		</div>\r\n	\r\n</div>\r\n\r\n";
   stack1 = self.invokePartial(partials.modal, 'modal', depth0, helpers, partials, data);
@@ -236,8 +265,7 @@ function program1(depth0,data) {
   buffer += "\r\n                    <h5>\r\n                    There ";
   stack1 = helpers['if'].call(depth0, depth0.singular, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += " "
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+  buffer += escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + " rating";
   stack2 = helpers.unless.call(depth0, depth0.singular, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -308,7 +336,7 @@ function program15(depth0,data) {
 function program16(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\r\n                	<li><a href=\"mapentries.html\" ";
+  buffer += "\r\n                	<li><a href=\"#\" ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.idFromName),stack1 ? stack1.call(depth0, depth0.name, options) : helperMissing.call(depth0, "idFromName", depth0.name, options)))
     + " name=\"categories_group\"><h5>";
@@ -350,7 +378,7 @@ function program20(depth0,data) {
   buffer += "\r\n                </div>\r\n            </div>\r\n            \r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n                <div class=\"span8 offset2 question_background\">\r\n                    <h5>\r\n                    Select the type of location to view";
   stack1 = helpers.unless.call(depth0, depth0['default'], {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n                    \r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\">\r\n              ";
+  buffer += "\r\n\r\n                    <div class=\"controls\">\r\n                      <label class=\"radio inline\" style=\"padding-left:0px;\">View as...</label>\r\n                      <label class=\"radio inline\" for=\"map\">\r\n                        <input type=\"radio\" id=\"map\" name=\"view_group\" value=\"map\" checked=\"checked\"> Map\r\n                      </label>\r\n                      <label class=\"radio inline\" for=\"text\">\r\n                        <input type=\"radio\" id=\"text\" name=\"view_group\" value=\"text\"> Text\r\n                      </label>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"spacer10\"></div>\r\n\r\n            <div class=\"row-fluid\">\r\n              <div class=\"span8 offset2 question_background\">\r\n              ";
   stack2 = helpers['if'].call(depth0, ((stack1 = ((stack1 = depth0.categories),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.number), {hash:{},inverse:self.noop,fn:self.program(14, program14, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\r\n              ";

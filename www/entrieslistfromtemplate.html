@@ -9,7 +9,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Age-CAP</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrapresponsive.min.css">
         <link rel="stylesheet" href="css/map.css">
@@ -32,7 +33,6 @@
     <script type="text/javascript" src="templates/templates.js"></script>
 
 <script>
-    
 
 var resultsArray= new Array();
 var i;
@@ -41,21 +41,14 @@ function getEntries(){
   coords = JSON.parse(localStorage.getItem("starting_coords"));
 
   radius = localStorage.getItem("radius");
-  if (radius != "all")
-  {
-    radius = Number(radius);
-  }
+  if (radius != "all") radius = Number(radius);
 
-  table = localStorage.getItem("tableToView");
+  table = localStorage.getItem("typeToView");
   names = JSON.parse(localStorage.getItem("names"));
   name = names[table]
 
-  if(radius != "all"){
-    message = "Listing "+name+" Locations within "+radius+" kilometers"; 
-  }
-  else{
-    message = "Listing "+name+" Locations Worldwide";
-  }
+  if(radius != "all") message = "Viewing " + name + " Locations within " + radius + " kilometers";
+  else message = "Viewing " + name + " Locations Worldwide";
 
   $("#headline").html(message);
 
@@ -85,6 +78,7 @@ function populateList(data){
              radius:radius,
              infiniteRadius: (radius == "all"),
              categories:data,
+             name:name,
              default: Number(localStorage.getItem("default"))
            };
 
@@ -97,13 +91,16 @@ function populateList(data){
   $(".entry").click(function (){
     path = $(this).attr("id");
     context = eval("data" + path);
-    localStorage.setItem("typeToView", context["table"])
+    localStorage.setItem("tableToView", context["table"])
     localStorage.setItem("nameToView", context["name"])
     localStorage.setItem("postalCodeToView", context["postal"])
+    window.location.href = "viewratingfromtemplate.html"
   });
 
   $(".more").click(function (){
     table = $(this).attr("id");
+    dataArray["table"] = table;
+    localStorage.setItem("dataArray", JSON.stringify(dataArray))
     localStorage.setItem("typeToView", table)
     window.location.href = "entrieslistfromtemplate.html"
 
