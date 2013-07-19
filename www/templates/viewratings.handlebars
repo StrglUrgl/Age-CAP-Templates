@@ -14,6 +14,18 @@
 	    <div class="row-fluid">
 	      <div class="span8 offset2 question_background">     
 		<h4>Rating #{{getNumber this}}:	{{getArrAvg scores}}</h4><p>{{date}}</p>
+
+			<div class="btn-group">
+                <button class="btn btn-primary">Options</button>
+                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="mapentries.html">View on Map</a></li> 
+                    <li><a href="ratingformfromtemplate.html">Rate this Location</a></li>
+                </ul>
+            </div>
+
 	    <table class="table table-bordered" style="color:white;">
 	    <tr>
 	    <td>#</td>

@@ -41,6 +41,21 @@
           else return "";
         });
 
+    /*Handlebars.registerHelper("addListener", function(context, options) {
+          $(document).ready(function() {
+              $('#view'+context["id"]).click(function() {
+                localStorage.setItem("typeToView", context["type"])
+                localStorage.setItem("radius", 10)
+                localStorage.setItem("starting_coords", JSON.stringify({lat:context["lat"], lng:context["lng"]}))
+
+              });
+              $('#rate'+context["id"]).click(function() {
+                localStorage.setItem("ratingLocation", JSON.stringify({context["ratingLocation"]}))
+                }
+              });
+          });
+        });*/
+
     Handlebars.registerHelper("getText", function(context, questions, options) {
           return questions[options.data["index"]]; 
         });
