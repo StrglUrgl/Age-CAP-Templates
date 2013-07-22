@@ -78,6 +78,7 @@
       <button name="id_btns" id="q2" class="btn btn-large btn-primary test">Providing care to a senior</button>
       <button name="id_btns" id="q3" class="btn btn-large btn-primary test">Working with a senior</button>
       <button name="id_btns" id="q4" class="btn btn-large btn-primary test">Responding for a senior</button>
+      <button name="id_btns" id="q7" class="btn btn-large btn-primary test">Senior's family member</button>
       <button name="id_btns" id="q5" class="btn btn-large btn-primary test">Prefer not to say</button>
       <button name="id_btns" id="q6" class="btn btn-large btn-primary test">Other</button>
     </div>
@@ -181,6 +182,7 @@
           submission = {uuid:uuid, checked:checked, is_mobile:isMobile.any()};
 
           $.post('http://142.150.169.179/user_ident.php', submission, function(data){
+            console.log(data)
             window.location.href = localStorage.getItem("trailingPage")
             // we send the gathered information to the database
             // then, we proceed to either rate or view a location
