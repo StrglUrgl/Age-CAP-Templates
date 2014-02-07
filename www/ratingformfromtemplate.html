@@ -60,6 +60,9 @@
   $(".ratingform").append (html);
   //End Handlebars code
 
+  $('.popover-btn').popover({placement: "bottom", html: true});
+
+
   function getArrAvg(context) {
     //filters out the non-numerical entries
     //returns the average of the filtered array
